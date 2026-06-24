@@ -3,10 +3,10 @@ import {
   PaymentProvider,
   PaymentProviderResponse,
   PaymentProviderConfig,
-} from './interfaces/payment-provider.interface';
-import { MockBkashProvider } from './mock-bkash.provider';
-import { MockNagadProvider } from './mock-nagad.provider';
-import { MockCardProvider } from './mock-card.provider';
+} from './interfaces/payment-provider.interface.js';
+import { MockBkashProvider } from './mock-bkash.provider.js';
+import { MockNagadProvider } from './mock-nagad.provider.js';
+import { MockCardProvider } from './mock-card.provider.js';
 
 export type ProviderType = 'bkash' | 'nagad' | 'card';
 

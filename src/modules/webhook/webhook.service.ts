@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { HmacUtil } from '../../common/utils/hmac.util';
+import { PrismaService } from '../../database/prisma.service.js';
+import { HmacUtil } from '../../common/utils/hmac.util.js';
 import axios, { AxiosResponse } from 'axios';
 
 @Injectable()

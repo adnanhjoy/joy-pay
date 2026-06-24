@@ -3,8 +3,8 @@ import {
   PaymentProvider,
   PaymentProviderResponse,
   PaymentProviderConfig,
-} from './interfaces/payment-provider.interface';
-import { HmacUtil } from '../../common/utils/hmac.util';
+} from './interfaces/payment-provider.interface.js';
+import { HmacUtil } from '../../common/utils/hmac.util.js';
 
 @Injectable()
 export class MockCardProvider implements PaymentProvider {

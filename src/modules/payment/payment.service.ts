@@ -4,10 +4,10 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { ProviderFactory, ProviderType } from '../provider/provider.factory';
-import { TransactionService } from '../transaction/transaction.service';
-import { WebhookService } from '../webhook/webhook.service';
+import { PrismaService } from '../../database/prisma.service.js';
+import { ProviderFactory, ProviderType } from '../provider/provider.factory.js';
+import { TransactionService } from '../transaction/transaction.service.js';
+import { WebhookService } from '../webhook/webhook.service.js';
 
 @Injectable()
 export class PaymentService {
@@ -116,7 +116,7 @@ export class PaymentService {
       return {
         sessionId: session.id,
         transactionId: transaction.id,
-        redirectUrl: `http://localhost:3000/payments/${session.id}/result`,
+        redirectUrl: `http://localhost:3000/api/v1/payments/${session.id}/result`,
         status: finalStatus.toLowerCase(),
         message: providerResponse.message,
       };

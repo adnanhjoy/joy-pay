@@ -3,10 +3,10 @@ import {
   ConflictException,
   NotFoundException,
 } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
-import { CreateMerchantDto } from './dto/create-merchant.dto';
-import { HmacUtil } from '../../common/utils/hmac.util';
-import { MerchantResponseDto } from './dto/merchant-response.dto';
+import { PrismaService } from '../../database/prisma.service.js';
+import { CreateMerchantDto } from './dto/create-merchant.dto.js';
+import { HmacUtil } from '../../common/utils/hmac.util.js';
+import { MerchantResponseDto } from './dto/merchant-response.dto.js';
 
 @Injectable()
 export class MerchantService {

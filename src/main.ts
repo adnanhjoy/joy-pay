@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import type { Request } from 'express';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module.js';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as expressModule from 'express';
 import 'dotenv/config';
@@ -14,6 +14,11 @@ const express = expressModule;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
 
   // Enable raw body for HMAC signature validation
   app.use(
@@ -29,10 +34,8 @@ async function bootstrap() {
     .setTitle('Joy Pay API')
     .setDescription('Payment Gateway API Documentation')
     .setVersion('1.0')
-    .addApiKey(
-      { type: 'apiKey', name: 'x-api-key', in: 'header' },
-      'x-api-key',
-    )
+    .addServer('http://localhost:3000/api/v1')
+    .addApiKey({ type: 'apiKey', name: 'x-api-key', in: 'header' }, 'x-api-key')
     .addApiKey(
       { type: 'apiKey', name: 'x-signature', in: 'header' },
       'x-signature',

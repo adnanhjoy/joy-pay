@@ -8,13 +8,13 @@ import {
   IsEnum,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import type { ProviderType } from '../../provider/provider.factory';
+import type { ProviderType } from '../../provider/provider.factory.js';
 
 export class CreatePaymentDto {
   @ApiProperty({ example: '100.50' })
   @IsNumber()
   @IsPositive()
-  amount: number;
+  amount!: number;
 
   @ApiProperty({ example: 'BDT', default: 'BDT' })
   @IsString()
@@ -34,7 +34,7 @@ export class CreatePaymentDto {
   @ApiProperty({ example: 'bkash', enum: ['bkash', 'nagad', 'card'] })
   @IsEnum(['bkash', 'nagad', 'card'])
   @IsNotEmpty()
-  provider: ProviderType;
+  provider!: ProviderType;
 
   @ApiProperty({ required: false })
   @IsString()

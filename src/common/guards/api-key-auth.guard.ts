@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 import {
   Injectable,
   CanActivate,
@@ -5,8 +6,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
-import { HmacUtil } from '../utils/hmac.util';
-import { PrismaService } from '../../database/prisma.service';
+import { HmacUtil } from '../utils/hmac.util.js';
+import { PrismaService } from '../../database/prisma.service.js';
 
 @Injectable()
 export class ApiKeyAuthGuard implements CanActivate {
@@ -52,7 +53,8 @@ export class ApiKeyAuthGuard implements CanActivate {
     }
 
     // Verify HMAC signature
-    const rawBody = request['rawBody'] || JSON.stringify(request.body);
+    const rawBody =
+      (request['rawBody'] as string) || JSON.stringify(request.body);
     const isValidSignature = HmacUtil.verifySignature(
       rawBody,
       timestamp,
@@ -87,3 +89,5 @@ declare global {
     }
   }
 }
+
+export {};

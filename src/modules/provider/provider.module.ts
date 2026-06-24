@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { MockBkashProvider } from './mock-bkash.provider';
-import { MockNagadProvider } from './mock-nagad.provider';
-import { MockCardProvider } from './mock-card.provider';
-import { ProviderFactory } from './provider.factory';
+import { MockBkashProvider } from './mock-bkash.provider.js';
+import { MockNagadProvider } from './mock-nagad.provider.js';
+import { MockCardProvider } from './mock-card.provider.js';
+import { ProviderFactory } from './provider.factory.js';
 
 @Module({
   providers: [

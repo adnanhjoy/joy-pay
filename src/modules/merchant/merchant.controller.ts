@@ -7,10 +7,10 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import { MerchantService } from './merchant.service';
-import { CreateMerchantDto } from './dto/create-merchant.dto';
+import { MerchantService } from './merchant.service.js';
+import { CreateMerchantDto } from './dto/create-merchant.dto.js';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { MerchantResponseDto } from './dto/merchant-response.dto';
+import { MerchantResponseDto } from './dto/merchant-response.dto.js';
 
 @ApiTags('merchant')
 @Controller('merchant')
