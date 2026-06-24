@@ -11,7 +11,12 @@ import {
 } from '@nestjs/common';
 import { PaymentService } from './payment.service.js';
 import { CreatePaymentDto } from './dto/create-payment.dto.js';
-import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiSecurity,
+} from '@nestjs/swagger';
 import { ApiKeyAuthGuard } from '../../common/guards/api-key-auth.guard.js';
 import { Request } from 'express';
 

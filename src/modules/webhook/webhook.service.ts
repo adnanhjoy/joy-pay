@@ -34,6 +34,7 @@ export class WebhookService {
       data: {
         merchantId,
         eventType,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         payload: payload as any,
         status: 'PENDING',
         retryCount,
@@ -77,6 +78,7 @@ export class WebhookService {
       );
     } catch (error: any) {
       this.logger.error(
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         `Webhook failed to ${merchant.webhookUrl} for event ${eventType}: ${error.message}`,
       );
 
@@ -85,7 +87,9 @@ export class WebhookService {
         where: { id: webhookLog.id },
         data: {
           status: 'FAILED',
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
           response: error.message,
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
           responseCode: error.response?.status,
         },
       });
