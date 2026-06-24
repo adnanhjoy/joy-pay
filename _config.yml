@@ -1,0 +1,8 @@
+# GitHub Pages config for Joy Pay
+# Enables API_DOCUMENTATION.md to render as documentation page
+include:
+  - API_DOCUMENTATION.md
+  - README.md
+
+title: Joy Pay API
+description: Payment Gateway API Documentation

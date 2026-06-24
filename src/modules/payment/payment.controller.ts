@@ -11,13 +11,16 @@ import {
 } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { CreatePaymentDto } from './dto/create-payment.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiSecurity } from '@nestjs/swagger';
 import { ApiKeyAuthGuard } from '../../common/guards/api-key-auth.guard';
 import { Request } from 'express';
 
 @ApiTags('payments')
 @Controller('payments')
 @UseGuards(ApiKeyAuthGuard)
+@ApiSecurity('x-api-key')
+@ApiSecurity('x-signature')
+@ApiSecurity('x-timestamp')
 export class PaymentController {
   constructor(private readonly paymentService: PaymentService) {}
 

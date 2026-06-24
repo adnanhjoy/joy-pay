@@ -4,6 +4,7 @@ import type { Request } from 'express';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as expressModule from 'express';
+import 'dotenv/config';
 
 interface RequestWithRawBody extends Request {
   rawBody?: string;
@@ -28,7 +29,10 @@ async function bootstrap() {
     .setTitle('Joy Pay API')
     .setDescription('Payment Gateway API Documentation')
     .setVersion('1.0')
-    .addApiKey({ type: 'apiKey', name: 'x-api-key', in: 'header' }, 'x-api-key')
+    .addApiKey(
+      { type: 'apiKey', name: 'x-api-key', in: 'header' },
+      'x-api-key',
+    )
     .addApiKey(
       { type: 'apiKey', name: 'x-signature', in: 'header' },
       'x-signature',
@@ -36,6 +40,10 @@ async function bootstrap() {
     .addApiKey(
       { type: 'apiKey', name: 'x-timestamp', in: 'header' },
       'x-timestamp',
+    )
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'JWT-auth',
     )
     .build();
 
