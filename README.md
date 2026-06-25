@@ -1,94 +1,243 @@
-# Joy Pay Backend API
+<div align="center">
 
-[![API Documentation](https://img.shields.io/badge/API-Documentation-blue?style=for-the-badge)](./API_DOCUMENTATION.md)
-[![Swagger UI](https://img.shields.io/badge/Swagger-UI-green?style=for-the-badge)](http://localhost:3000/docs)
+# 🚀 Joy Pay
 
-Payment Gateway API built with NestJS, Prisma ORM, PostgreSQL (Supabase), and TypeScript.
+### Modern Payment Gateway Infrastructure for Bangladesh
 
-## Tech Stack
+Secure, scalable, and developer-friendly payment processing built with NestJS, Prisma, PostgreSQL, and TypeScript.
 
-- NestJS
-- Prisma ORM
-- PostgreSQL (Supabase)
-- TypeScript
-- JWT + HMAC Authentication
-- Swagger Documentation
+<p align="center">
+  <a href="./API_DOCUMENTATION.md">
+    <img src="https://img.shields.io/badge/Documentation-000000?style=for-the-badge&logo=gitbook&logoColor=white" />
+  </a>
+  <a href="http://localhost:3000/docs">
+    <img src="https://img.shields.io/badge/Swagger-16A34A?style=for-the-badge&logo=rocket&logoColor=white" />
+  </a>
+</p>
 
-## Project Structure
+<p align="center">
+  <img src="https://img.shields.io/badge/NestJS-Backend-E0234E?logo=nestjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white" />
+  <img src="https://img.shields.io/badge/PostgreSQL-Supabase-4169E1?logo=postgresql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Prisma-ORM-2D3748?logo=prisma&logoColor=white" />
+  <img src="https://img.shields.io/badge/License-MIT-success" />
+</p>
 
+</div>
+
+---
+
+## ✨ Features
+
+- 🔐 HMAC SHA256 Authentication
+- 🔑 JWT Authentication
+- 💳 Payment Processing
+- 🏪 Merchant Management
+- 📊 Transaction Tracking
+- 🔔 Webhook Events
+- 📄 Swagger Documentation
+- ⚡ NestJS Architecture
+- 🗄️ PostgreSQL + Prisma ORM
+- 🚀 Production Ready Structure
+
+---
+
+## 🏗 Architecture
+
+```mermaid
+flowchart LR
+
+Merchant --> JoyPayAPI
+
+JoyPayAPI --> bKash
+JoyPayAPI --> Nagad
+JoyPayAPI --> Card
+
+JoyPayAPI --> PostgreSQL
+JoyPayAPI --> Webhooks
 ```
-prisma/              → Prisma schema & migrations
-src/
-  modules/
-    auth/            → JWT authentication (merchant login)
-    merchant/        → Merchant registration & management
-    payment/         → Payment session processing
-    provider/        → Mock payment providers (bKash, Nagad, Card)
-    transaction/     → Transaction records
-    webhook/         → Webhook notifications
-  common/
-    guards/          → API Key + HMAC auth guard
-    utils/           → HMAC signature utilities
-  config/            → Application configuration
-  database/          → Prisma service (global)
-  main.ts            → App entry point with Swagger setup
-API_DOCUMENTATION.md → Full API reference & testing guide
+
+---
+
+## 📦 Tech Stack
+
+| Layer | Technology |
+|---------|------------|
+| Backend | NestJS |
+| Language | TypeScript |
+| Database | PostgreSQL |
+| ORM | Prisma |
+| Authentication | JWT + HMAC |
+| API Docs | Swagger |
+
+---
+
+## 🚀 Quick Start
+
+### Clone Repository
+
+```bash
+git clone https://github.com/adnanhjoy/joy-pay.git
+
+cd joy-pay
 ```
 
-## Setup
+### Install Dependencies
 
-### 1. Install dependencies
 ```bash
 npm install
 ```
 
-### 2. Setup environment variables
-```bash
-# Create .env file
-DATABASE_URL="your_supabase_database_url"
-JWT_SECRET="your-jwt-secret"
-JWT_EXPIRATION="1d"
+### Setup Environment
+
+```env
+DATABASE_URL=
+JWT_SECRET=
+PORT=3000
 ```
 
-### 3. Run Prisma migration
+### Generate Prisma Client
+
 ```bash
-npx prisma migrate dev --name init
+npx prisma generate
 ```
 
-### 4. Start development server
+### Run Migrations
+
+```bash
+npx prisma migrate dev
+```
+
+### Start Development Server
+
 ```bash
 npm run start:dev
 ```
 
-## API Documentation
+Server will run at:
 
-- **Swagger UI**: http://localhost:3000/docs
-- **Full API Reference**: See [API_DOCUMENTATION.md](./API_DOCUMENTATION.md)
+```bash
+http://localhost:3000
+```
 
-## Features
+---
 
-- Merchant registration with API key generation
-- HMAC-signed API authentication (anti-tamper, anti-replay)
-- JWT-based merchant dashboard authentication
-- Payment session management (create, get, cancel)
-- Mock payment providers (bKash, Nagad, Card)
-- Webhook notifications with retry logic
-- Transaction history
-- Interactive Swagger documentation
+## 💳 Supported Providers
 
-## API Endpoints
+| Provider | Status |
+|------------|--------|
+| bKash | Supported |
+| Nagad | Supported |
+| Card | Supported |
 
-| Method | Endpoint | Auth | Description |
-|--------|----------|------|-------------|
-| POST | /api/v1/auth/login | None | Merchant login (JWT) |
-| GET | /api/v1/auth/profile | JWT | Get merchant profile |
-| POST | /api/v1/merchant/create | None | Register merchant |
-| GET | /api/v1/merchant/:id | None | Get merchant details |
-| POST | /api/v1/payments/create | API Key + HMAC | Create payment |
-| GET | /api/v1/payments/:id | API Key + HMAC | Get payment session |
-| POST | /api/v1/payments/:id/cancel | API Key + HMAC | Cancel payment |
-| POST | /api/v1/webhook/test | None | Test webhook endpoint |
+---
 
-## Author
+## 🔄 Payment Lifecycle
 
-Adnan Hossain — MERN Stack Developer
+```text
+INITIATED
+    ↓
+PENDING
+    ↓
+SUCCESS
+    ↓
+WEBHOOK SENT
+```
+
+Failed Flow:
+
+```text
+INITIATED
+    ↓
+PENDING
+    ↓
+FAILED
+```
+
+---
+
+## 🔔 Webhooks
+
+Example:
+
+```json
+{
+  "event": "payment.success",
+  "transactionId": "uuid",
+  "amount": 100,
+  "provider": "bkash",
+  "timestamp": "2026-01-01T00:00:00.000Z"
+}
+```
+
+---
+
+## 🛡 Security
+
+Joy Pay implements:
+
+- HMAC SHA256 Request Signing
+- Timestamp Verification
+- Replay Attack Protection
+- JWT Access Tokens
+- Input Validation
+- Global Exception Handling
+
+---
+
+## 📂 Project Structure
+
+```text
+src
+│
+├── auth
+├── merchant
+├── payments
+├── transactions
+├── webhook
+├── common
+├── config
+├── prisma
+│
+├── app.module.ts
+└── main.ts
+```
+
+---
+
+## 📚 Documentation
+
+### Swagger UI
+
+```text
+http://localhost:3000/docs
+```
+
+### OpenAPI Specification
+
+Generated automatically via Swagger.
+
+---
+
+## 🗺 Roadmap
+
+- [x] Merchant Management
+- [x] JWT Authentication
+- [x] HMAC Authentication
+- [x] Payment Processing
+- [x] Transaction Tracking
+- [x] Webhooks
+- [ ] Refund System
+- [ ] Settlement Engine
+- [ ] Multi Currency
+- [ ] Real bKash Integration
+- [ ] Real Nagad Integration
+- [ ] Admin Dashboard
+
+---
+
+<div align="center">
+
+Built with ❤️ using NestJS & TypeScript
+
+</div>

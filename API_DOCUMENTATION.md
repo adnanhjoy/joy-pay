@@ -1,53 +1,180 @@
-# Joy Pay API Documentation
+<div align="center">
 
-Payment Gateway API - MVP
+# 💳 Joy Pay API Documentation
 
-## Table of Contents
-- [Authentication](#authentication)
-  - [API Key + HMAC (for Payment APIs)](#api-key--hmac-for-payment-apis)
-  - [JWT Auth (for Merchant Dashboard)](#jwt-auth-for-merchant-dashboard)
-- [Merchant APIs](#merchant-apis)
-- [Payment APIs](#payment-apis)
-- [Transaction APIs](#transaction-apis)
-- [Webhook APIs](#webhook-apis)
-- [Supported Providers](#supported-providers)
-- [Payment Status Lifecycle](#payment-status-lifecycle)
-- [Webhook Events](#webhook-events)
-- [Error Codes](#error-codes)
-- [Testing with Swagger](#testing-with-swagger)
+Modern payment infrastructure for merchants, platforms, and businesses.
+
+Build secure payment experiences using HMAC authentication, webhook events, transaction tracking, and merchant management APIs.
+
+---
+
+### Quick Links
+
+[Getting Started](#getting-started) •
+[Authentication](#authentication) •
+[Merchant](#merchant-apis) •
+[Payments](#payment-apis) •
+[Transactions](#transaction-apis) •
+[Webhooks](#webhook-apis) •
+[Error Codes](#error-codes)
+
+</div>
+
+---
+
+## Base URLs
+
+### Development
+
+```http
+http://localhost:3000/api/v1
+```
+
+---
+
+## API Version
+
+Current Version:
+
+```text
+v1
+```
+
+All endpoints are prefixed with:
+
+```http
+/api/v1
+```
+
+---
+
+## Quick Start
+
+Integrating Joy Pay requires only three steps:
+
+1. Create Merchant Account
+2. Generate HMAC Signature
+3. Create Payment
 
 ---
 
 ## Authentication
 
-This API uses two authentication methods:
+Joy Pay uses two authentication mechanisms:
 
-### API Key + HMAC (for Payment APIs)
+| Method | Usage |
+|----------|----------|
+| API Key + HMAC | Payment APIs |
+| JWT Authentication | Merchant Dashboard APIs |
 
-All payment endpoints require three headers:
+---
 
-| Header | Description |
-|--------|-------------|
-| `x-api-key` | Merchant's public API key |
-| `x-timestamp` | Unix timestamp in seconds |
-| `x-signature` | HMAC_SHA256(payload + timestamp, secretKey) |
+## API Key + HMAC Authentication
 
-#### Generating HMAC Signature (Node.js)
+All payment endpoints require the following headers:
+
+| Header | Required | Description |
+|----------|----------|----------|
+| x-api-key | Yes | Merchant API Key |
+| x-timestamp | Yes | Current Unix Timestamp |
+| x-signature | Yes | HMAC SHA256 Signature |
+
+---
+
+## Authentication Flow
+
+```text
+Request Body
+      +
+Current Timestamp
+      │
+      ▼
+
+JSON.stringify(body) + timestamp
+      │
+      ▼
+
+HMAC SHA256(secretKey)
+      │
+      ▼
+
+Base64 Encode
+      │
+      ▼
+
+x-signature
+```
+
+---
+
+## Signature Generation (Node.js)
 
 ```javascript
-const crypto = require('crypto');
+const crypto = require("crypto");
 
-function generateSignature(payload, timestamp, secretKey) {
-  const payloadString = typeof payload === 'string' ? payload : JSON.stringify(payload);
-  const dataToSign = payloadString + timestamp;
-  return crypto.createHmac('sha256', secretKey).update(dataToSign).digest('base64');
+const payload = {
+  amount: 100,
+  currency: "BDT",
+  provider: "bkash"
+};
+
+const timestamp = Math.floor(Date.now() / 1000);
+
+const signature = crypto
+  .createHmac(
+    "sha256",
+    "sk_live_your_secret_key"
+  )
+  .update(
+    JSON.stringify(payload) + timestamp
+  )
+  .digest("base64");
+
+console.log(signature);
+```
+
+---
+
+## Signature Generation (TypeScript)
+
+```typescript
+import crypto from "crypto";
+
+function generateSignature(
+  payload: object,
+  timestamp: number,
+  secretKey: string,
+): string {
+  return crypto
+    .createHmac("sha256", secretKey)
+    .update(
+      JSON.stringify(payload) + timestamp
+    )
+    .digest("base64");
 }
+```
 
-// Example
+---
+
+## Example Headers
+
+```http
+x-api-key: pk_live_xxxxxxxxx
+x-timestamp: 1750855571
+x-signature: 5WZK9c8nQW4B9...
+```
+
+---
+
+## Example Payload
+
+```typescript
 const payload = JSON.stringify({ amount: 100, provider: 'bkash' });
 const timestamp = Math.floor(Date.now() / 1000);
 const signature = generateSignature(payload, timestamp, 'your-secret-key');
 ```
+
+---
 
 #### Signature Verification Flow
 
@@ -60,9 +187,38 @@ const signature = generateSignature(payload, timestamp, 'your-secret-key');
 
 ---
 
-### JWT Auth (for Merchant Dashboard)
+## Timestamp Validation
 
-Used for merchant dashboard/management endpoints.
+Joy Pay validates request timestamps to prevent replay attacks.
+
+Rules:
+
+- Maximum tolerance: 5 minutes
+- Expired timestamps are rejected
+- Future timestamps are rejected
+
+Possible Error:
+
+```json
+{
+  "statusCode": 401,
+  "message": "Request timestamp expired or invalid"
+}
+```
+
+---
+
+## JWT Authentication
+
+Used for dashboard endpoints.
+
+Required Header:
+
+```http
+Authorization: Bearer <access_token>
+```
+
+---
 
 #### Login
 
@@ -303,196 +459,67 @@ curl -X POST http://localhost:3000/api/v1/webhook/test \
 
 ---
 
-## Supported Providers
 
-| Provider | Description | Mock Success Rate |
-|----------|-------------|-----------------|
-| `bkash` | bKash mobile wallet | ~85% |
-| `nagad` | Nagad mobile wallet | ~90% |
-| `card` | Credit/Debit card | ~92% |
+## Payment Flow
 
-Note: These are mock providers with simulated delays (1-3 seconds) and random success/failure outcomes.
+```mermaid
+sequenceDiagram
+
+Merchant->>JoyPay: Create Payment
+
+JoyPay->>Provider: Process Payment
+
+Provider-->>JoyPay: Result
+
+JoyPay-->>Merchant: API Response
+
+JoyPay->>Merchant: Webhook Event
+```
 
 ---
 
-## Payment Status Lifecycle
+## Supported Payment Providers
 
-| Status | Description |
-|--------|-------------|
-| `INITIATED` | Payment session created |
-| `PENDING` | Payment being processed |
-| `SUCCESS` | Payment completed successfully |
-| `FAILED` | Payment failed |
-| `CANCELLED` | Payment cancelled by merchant/user |
-
----
-
-## Webhook Events
-
-When a payment completes or fails, the merchant's webhook URL receives a POST request:
-
-### Payment Success Webhook
-
-```json
-{
-  "event": "payment.success",
-  "transactionId": "uuid",
-  "amount": 100.50,
-  "provider": "bkash",
-  "providerTransactionId": "bKash_abc123...",
-  "timestamp": "2024-01-01T00:00:00.000Z"
-}
-```
-
-### Payment Failed Webhook
-
-```json
-{
-  "event": "payment.failed",
-  "transactionId": "uuid",
-  "amount": 100.50,
-  "provider": "bkash",
-  "failureReason": "Payment failed - insufficient balance",
-  "timestamp": "2024-01-01T00:00:00.000Z"
-}
-```
-
-### Webhook Headers
-
-| Header | Description |
-|--------|-------------|
-| `x-event-type` | Event type (e.g., payment.success) |
-| `x-timestamp` | Unix timestamp |
-| `x-signature` | HMAC signature for verification |
-
-### Verify Webhook Signature (Merchant Side)
-
-```javascript
-function verifyWebhookSignature(payload, timestamp, signature, secretKey) {
-  const payloadString = JSON.stringify(payload);
-  const dataToSign = payloadString + timestamp;
-  const expectedSignature = crypto.createHmac('sha256', secretKey).update(dataToSign).digest('base64');
-  return signature === expectedSignature;
-}
-```
+| Provider | Description |
+|----------|----------|
+| bkash | bKash Wallet |
+| nagad | Nagad Wallet |
+| card | Credit / Debit Card |
 
 ---
 
 ## Error Codes
 
-| Status | Description |
-|--------|-------------|
-| 400 | Bad Request - Invalid input or operation not allowed |
-| 401 | Unauthorized - Invalid API key, signature, or JWT token |
-| 404 | Not Found - Resource not found |
-| 409 | Conflict - Resource already exists (e.g., duplicate email) |
-| 500 | Internal Server Error |
+| Code | Description |
+|----------|----------|
+| INVALID_API_KEY | Invalid API Key |
+| INVALID_SIGNATURE | Invalid Signature |
+| TIMESTAMP_EXPIRED | Timestamp Expired |
+| MERCHANT_NOT_FOUND | Merchant Not Found |
+| PAYMENT_NOT_FOUND | Payment Not Found |
+| TRANSACTION_NOT_FOUND | Transaction Not Found |
+| UNAUTHORIZED | Unauthorized Access |
+| INTERNAL_SERVER_ERROR | Internal Server Error |
 
 ---
 
-## Testing with Swagger
 
-Once the server is running, access the interactive Swagger documentation at:
+## Swagger Documentation
 
-```
+Interactive API documentation:
+
+```text
 http://localhost:3000/docs
 ```
 
-### How to Test Each Endpoint
+---
 
-#### Step 1: Create a Merchant
-1. Navigate to `POST /api/v1/merchant/create`
-2. Click **Try it out**
-3. Enter body:
-   ```json
-   {
-     "name": "Test Merchant",
-     "email": "test@example.com",
-     "webhookUrl": "https://example.com/webhook"
-   }
-   ```
-4. Click **Execute**
-5. Copy the `apiKey` and `secretKey` from the response
 
-#### Step 2: Generate HMAC Signature
-For payment endpoints, you need to generate an HMAC signature. Here's a browser-ready JavaScript snippet:
+## v1.0.0
 
-```javascript
-async function generateHmacSignature(payload, secretKey) {
-  const timestamp = Math.floor(Date.now() / 1000);
-  const payloadString = JSON.stringify(payload);
-  const dataToSign = payloadString + timestamp;
-  const encoder = new TextEncoder();
-  const key = await crypto.subtle.importKey(
-    'raw', encoder.encode(secretKey),
-    { name: 'HMAC', hash: 'SHA-256' },
-    false, ['sign']
-  );
-  const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(dataToSign));
-  const base64 = btoa(String.fromCharCode(...new Uint8Array(signature)));
-  return { timestamp, signature: base64 };
-}
-
-// Example usage:
-// const { timestamp, signature } = await generateHmacSignature(
-//   { amount: 100, currency: "BDT", provider: "bkash" },
-//   "sk_live_your_secret_key"
-// );
-```
-
-1. In Swagger UI, click the **Authorize** button (top-right)
-2. Enter values for:
-   - `x-api-key`: Your `pk_live_...` key
-   - `x-timestamp`: Current Unix timestamp
-   - `x-signature`: Generated HMAC signature
-3. Click **Authorize**, then **Close**
-
-#### Step 3: Test Payment APIs
-1. Navigate to `POST /api/v1/payments/create`
-2. Click **Try it out**
-3. Enter body:
-   ```json
-   {
-     "amount": 100,
-     "currency": "BDT",
-     "provider": "bkash",
-     "customerName": "John Doe",
-     "customerEmail": "john@example.com",
-     "description": "Test payment"
-   }
-   ```
-4. Click **Execute**
-5. Observe the payment processing (1-3 second simulated delay)
-6. View response showing success or failure
-
-#### Step 4: Test JWT Auth (for dashboard)
-1. Navigate to `POST /api/v1/auth/login`
-2. Enter your merchant email and `secretKey`
-3. Click **Execute**
-4. Copy the `accessToken` from the response
-5. In Swagger's Authorize dialog (top-right), enter the token in the `JWT-auth` field as: `Bearer <token>`
-6. Now you can access `GET /api/v1/auth/profile`
-
-#### Example Payment Response (Success)
-
-```json
-{
-  "sessionId": "550e8400-e29b-41d4-a716-446655440000",
-  "transactionId": "550e8400-e29b-41d4-a716-446655440001",
-  "redirectUrl": "http://localhost:3000/payments/550e8400-e29b-41d4-a716-446655440000/result",
-  "status": "success",
-  "message": "Payment successful via bKash"
-}
-```
-
-#### Example Payment Response (Failure)
-
-```json
-{
-  "sessionId": "550e8400-e29b-41d4-a716-446655440002",
-  "transactionId": "550e8400-e29b-41d4-a716-446655440003",
-  "redirectUrl": "http://localhost:3000/payments/550e8400-e29b-41d4-a716-446655440002/result",
-  "status": "failed",
-  "message": "Payment failed - insufficient balance"
-}
-```
+- Merchant Management
+- JWT Authentication
+- HMAC Authentication
+- Payment Processing
+- Transaction Tracking
+- Webhooks
