@@ -1,0 +1,6 @@
+enum WebhookStatus {
+  PENDING
+  SENT
+  FAILED
+  RETRIED
+}

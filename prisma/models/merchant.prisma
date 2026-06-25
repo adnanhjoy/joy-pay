@@ -1,0 +1,46 @@
+model Merchant {
+  id               String   @id @default(uuid())
+
+  name             String
+  email            String   @unique
+  phone            String
+
+  businessName     String
+  businessType     String
+  tradeLicense     String
+  businessRegNo    String?
+  tinNo            String?
+  businessAddress  String
+  businessWebsite  String?
+  businessCategory String
+
+  apiKey           String   @unique
+  secretKey        String
+  webhookSecret    String?
+
+  webhookUrl       String?
+
+  isEmailVerified  Boolean  @default(false)
+  isPhoneVerified  Boolean  @default(false)
+  isKycVerified    Boolean  @default(false)
+
+  status           MerchantStatus @default(PENDING)
+
+  bankName         String?
+  accountName      String?
+  accountNumber    String?
+  routingNumber    String?
+
+  isActive         Boolean  @default(true)
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  paymentSessions  PaymentSession[]
+  transactions     Transaction[]
+  webhookLogs      WebhookLog[]
+
+  @@index([apiKey])
+  @@index([email])
+  @@map("merchants")
+}

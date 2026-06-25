@@ -32,11 +32,9 @@ export class MerchantService {
     // Create merchant
     const merchant = await this.prisma.merchant.create({
       data: {
-        name: dto.name,
-        email: dto.email,
+        ...dto,
         apiKey,
         secretKey,
-        webhookUrl: dto.webhookUrl,
       },
     });
 

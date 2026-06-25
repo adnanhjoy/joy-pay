@@ -1,0 +1,20 @@
+model WebhookLog {
+  id          String   @id @default(uuid())
+  merchantId  String
+  eventType   String
+  payload     Json
+  status      WebhookStatus @default(PENDING)
+  retryCount  Int      @default(0)
+  response    String?
+  responseCode Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  merchant    Merchant @relation(fields: [merchantId], references: [id])
+
+  @@index([merchantId])
+  @@index([eventType])
+  @@index([status])
+  @@map("webhook_logs")
+}

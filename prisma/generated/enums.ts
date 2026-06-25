@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const MerchantStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type MerchantStatus = (typeof MerchantStatus)[keyof typeof MerchantStatus]
+
+
 export const PaymentStatus = {
   INITIATED: 'INITIATED',
   PENDING: 'PENDING',

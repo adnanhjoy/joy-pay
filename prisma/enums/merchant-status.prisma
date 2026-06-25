@@ -1,0 +1,5 @@
+enum MerchantStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

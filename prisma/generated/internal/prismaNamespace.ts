@@ -746,9 +746,27 @@ export const MerchantScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  phone: 'phone',
+  businessName: 'businessName',
+  businessType: 'businessType',
+  tradeLicense: 'tradeLicense',
+  businessRegNo: 'businessRegNo',
+  tinNo: 'tinNo',
+  businessAddress: 'businessAddress',
+  businessWebsite: 'businessWebsite',
+  businessCategory: 'businessCategory',
   apiKey: 'apiKey',
   secretKey: 'secretKey',
+  webhookSecret: 'webhookSecret',
   webhookUrl: 'webhookUrl',
+  isEmailVerified: 'isEmailVerified',
+  isPhoneVerified: 'isPhoneVerified',
+  isKycVerified: 'isKycVerified',
+  status: 'status',
+  bankName: 'bankName',
+  accountName: 'accountName',
+  accountNumber: 'accountNumber',
+  routingNumber: 'routingNumber',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -878,6 +896,20 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'MerchantStatus'
+ */
+export type EnumMerchantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MerchantStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'MerchantStatus[]'
+ */
+export type ListEnumMerchantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MerchantStatus[]'>
     
 
 

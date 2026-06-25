@@ -28,9 +28,27 @@ export type MerchantMinAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
+  phone: string | null
+  businessName: string | null
+  businessType: string | null
+  tradeLicense: string | null
+  businessRegNo: string | null
+  tinNo: string | null
+  businessAddress: string | null
+  businessWebsite: string | null
+  businessCategory: string | null
   apiKey: string | null
   secretKey: string | null
+  webhookSecret: string | null
   webhookUrl: string | null
+  isEmailVerified: boolean | null
+  isPhoneVerified: boolean | null
+  isKycVerified: boolean | null
+  status: $Enums.MerchantStatus | null
+  bankName: string | null
+  accountName: string | null
+  accountNumber: string | null
+  routingNumber: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -40,9 +58,27 @@ export type MerchantMaxAggregateOutputType = {
   id: string | null
   name: string | null
   email: string | null
+  phone: string | null
+  businessName: string | null
+  businessType: string | null
+  tradeLicense: string | null
+  businessRegNo: string | null
+  tinNo: string | null
+  businessAddress: string | null
+  businessWebsite: string | null
+  businessCategory: string | null
   apiKey: string | null
   secretKey: string | null
+  webhookSecret: string | null
   webhookUrl: string | null
+  isEmailVerified: boolean | null
+  isPhoneVerified: boolean | null
+  isKycVerified: boolean | null
+  status: $Enums.MerchantStatus | null
+  bankName: string | null
+  accountName: string | null
+  accountNumber: string | null
+  routingNumber: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -52,9 +88,27 @@ export type MerchantCountAggregateOutputType = {
   id: number
   name: number
   email: number
+  phone: number
+  businessName: number
+  businessType: number
+  tradeLicense: number
+  businessRegNo: number
+  tinNo: number
+  businessAddress: number
+  businessWebsite: number
+  businessCategory: number
   apiKey: number
   secretKey: number
+  webhookSecret: number
   webhookUrl: number
+  isEmailVerified: number
+  isPhoneVerified: number
+  isKycVerified: number
+  status: number
+  bankName: number
+  accountName: number
+  accountNumber: number
+  routingNumber: number
   isActive: number
   createdAt: number
   updatedAt: number
@@ -66,9 +120,27 @@ export type MerchantMinAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  phone?: true
+  businessName?: true
+  businessType?: true
+  tradeLicense?: true
+  businessRegNo?: true
+  tinNo?: true
+  businessAddress?: true
+  businessWebsite?: true
+  businessCategory?: true
   apiKey?: true
   secretKey?: true
+  webhookSecret?: true
   webhookUrl?: true
+  isEmailVerified?: true
+  isPhoneVerified?: true
+  isKycVerified?: true
+  status?: true
+  bankName?: true
+  accountName?: true
+  accountNumber?: true
+  routingNumber?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -78,9 +150,27 @@ export type MerchantMaxAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  phone?: true
+  businessName?: true
+  businessType?: true
+  tradeLicense?: true
+  businessRegNo?: true
+  tinNo?: true
+  businessAddress?: true
+  businessWebsite?: true
+  businessCategory?: true
   apiKey?: true
   secretKey?: true
+  webhookSecret?: true
   webhookUrl?: true
+  isEmailVerified?: true
+  isPhoneVerified?: true
+  isKycVerified?: true
+  status?: true
+  bankName?: true
+  accountName?: true
+  accountNumber?: true
+  routingNumber?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -90,9 +180,27 @@ export type MerchantCountAggregateInputType = {
   id?: true
   name?: true
   email?: true
+  phone?: true
+  businessName?: true
+  businessType?: true
+  tradeLicense?: true
+  businessRegNo?: true
+  tinNo?: true
+  businessAddress?: true
+  businessWebsite?: true
+  businessCategory?: true
   apiKey?: true
   secretKey?: true
+  webhookSecret?: true
   webhookUrl?: true
+  isEmailVerified?: true
+  isPhoneVerified?: true
+  isKycVerified?: true
+  status?: true
+  bankName?: true
+  accountName?: true
+  accountNumber?: true
+  routingNumber?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
@@ -175,9 +283,27 @@ export type MerchantGroupByOutputType = {
   id: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo: string | null
+  tinNo: string | null
+  businessAddress: string
+  businessWebsite: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret: string | null
   webhookUrl: string | null
+  isEmailVerified: boolean
+  isPhoneVerified: boolean
+  isKycVerified: boolean
+  status: $Enums.MerchantStatus
+  bankName: string | null
+  accountName: string | null
+  accountNumber: string | null
+  routingNumber: string | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
@@ -208,9 +334,27 @@ export type MerchantWhereInput = {
   id?: Prisma.StringFilter<"Merchant"> | string
   name?: Prisma.StringFilter<"Merchant"> | string
   email?: Prisma.StringFilter<"Merchant"> | string
+  phone?: Prisma.StringFilter<"Merchant"> | string
+  businessName?: Prisma.StringFilter<"Merchant"> | string
+  businessType?: Prisma.StringFilter<"Merchant"> | string
+  tradeLicense?: Prisma.StringFilter<"Merchant"> | string
+  businessRegNo?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  tinNo?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  businessAddress?: Prisma.StringFilter<"Merchant"> | string
+  businessWebsite?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  businessCategory?: Prisma.StringFilter<"Merchant"> | string
   apiKey?: Prisma.StringFilter<"Merchant"> | string
   secretKey?: Prisma.StringFilter<"Merchant"> | string
+  webhookSecret?: Prisma.StringNullableFilter<"Merchant"> | string | null
   webhookUrl?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  isEmailVerified?: Prisma.BoolFilter<"Merchant"> | boolean
+  isPhoneVerified?: Prisma.BoolFilter<"Merchant"> | boolean
+  isKycVerified?: Prisma.BoolFilter<"Merchant"> | boolean
+  status?: Prisma.EnumMerchantStatusFilter<"Merchant"> | $Enums.MerchantStatus
+  bankName?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  accountName?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  accountNumber?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  routingNumber?: Prisma.StringNullableFilter<"Merchant"> | string | null
   isActive?: Prisma.BoolFilter<"Merchant"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Merchant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Merchant"> | Date | string
@@ -223,9 +367,27 @@ export type MerchantOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  businessName?: Prisma.SortOrder
+  businessType?: Prisma.SortOrder
+  tradeLicense?: Prisma.SortOrder
+  businessRegNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  tinNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessAddress?: Prisma.SortOrder
+  businessWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessCategory?: Prisma.SortOrder
   apiKey?: Prisma.SortOrder
   secretKey?: Prisma.SortOrder
+  webhookSecret?: Prisma.SortOrderInput | Prisma.SortOrder
   webhookUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  isPhoneVerified?: Prisma.SortOrder
+  isKycVerified?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountName?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  routingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -242,8 +404,26 @@ export type MerchantWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.MerchantWhereInput[]
   NOT?: Prisma.MerchantWhereInput | Prisma.MerchantWhereInput[]
   name?: Prisma.StringFilter<"Merchant"> | string
+  phone?: Prisma.StringFilter<"Merchant"> | string
+  businessName?: Prisma.StringFilter<"Merchant"> | string
+  businessType?: Prisma.StringFilter<"Merchant"> | string
+  tradeLicense?: Prisma.StringFilter<"Merchant"> | string
+  businessRegNo?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  tinNo?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  businessAddress?: Prisma.StringFilter<"Merchant"> | string
+  businessWebsite?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  businessCategory?: Prisma.StringFilter<"Merchant"> | string
   secretKey?: Prisma.StringFilter<"Merchant"> | string
+  webhookSecret?: Prisma.StringNullableFilter<"Merchant"> | string | null
   webhookUrl?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  isEmailVerified?: Prisma.BoolFilter<"Merchant"> | boolean
+  isPhoneVerified?: Prisma.BoolFilter<"Merchant"> | boolean
+  isKycVerified?: Prisma.BoolFilter<"Merchant"> | boolean
+  status?: Prisma.EnumMerchantStatusFilter<"Merchant"> | $Enums.MerchantStatus
+  bankName?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  accountName?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  accountNumber?: Prisma.StringNullableFilter<"Merchant"> | string | null
+  routingNumber?: Prisma.StringNullableFilter<"Merchant"> | string | null
   isActive?: Prisma.BoolFilter<"Merchant"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Merchant"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Merchant"> | Date | string
@@ -256,9 +436,27 @@ export type MerchantOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  businessName?: Prisma.SortOrder
+  businessType?: Prisma.SortOrder
+  tradeLicense?: Prisma.SortOrder
+  businessRegNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  tinNo?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessAddress?: Prisma.SortOrder
+  businessWebsite?: Prisma.SortOrderInput | Prisma.SortOrder
+  businessCategory?: Prisma.SortOrder
   apiKey?: Prisma.SortOrder
   secretKey?: Prisma.SortOrder
+  webhookSecret?: Prisma.SortOrderInput | Prisma.SortOrder
   webhookUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  isPhoneVerified?: Prisma.SortOrder
+  isKycVerified?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  bankName?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountName?: Prisma.SortOrderInput | Prisma.SortOrder
+  accountNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  routingNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -274,9 +472,27 @@ export type MerchantScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
   name?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
   email?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
+  phone?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
+  businessName?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
+  businessType?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
+  tradeLicense?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
+  businessRegNo?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
+  tinNo?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
+  businessAddress?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
+  businessWebsite?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
+  businessCategory?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
   apiKey?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
   secretKey?: Prisma.StringWithAggregatesFilter<"Merchant"> | string
+  webhookSecret?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
   webhookUrl?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
+  isEmailVerified?: Prisma.BoolWithAggregatesFilter<"Merchant"> | boolean
+  isPhoneVerified?: Prisma.BoolWithAggregatesFilter<"Merchant"> | boolean
+  isKycVerified?: Prisma.BoolWithAggregatesFilter<"Merchant"> | boolean
+  status?: Prisma.EnumMerchantStatusWithAggregatesFilter<"Merchant"> | $Enums.MerchantStatus
+  bankName?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
+  accountName?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
+  accountNumber?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
+  routingNumber?: Prisma.StringNullableWithAggregatesFilter<"Merchant"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Merchant"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Merchant"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Merchant"> | Date | string
@@ -286,9 +502,27 @@ export type MerchantCreateInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -301,9 +535,27 @@ export type MerchantUncheckedCreateInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -316,9 +568,27 @@ export type MerchantUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -331,9 +601,27 @@ export type MerchantUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -346,9 +634,27 @@ export type MerchantCreateManyInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -358,9 +664,27 @@ export type MerchantUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -370,9 +694,27 @@ export type MerchantUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -382,9 +724,27 @@ export type MerchantCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  businessName?: Prisma.SortOrder
+  businessType?: Prisma.SortOrder
+  tradeLicense?: Prisma.SortOrder
+  businessRegNo?: Prisma.SortOrder
+  tinNo?: Prisma.SortOrder
+  businessAddress?: Prisma.SortOrder
+  businessWebsite?: Prisma.SortOrder
+  businessCategory?: Prisma.SortOrder
   apiKey?: Prisma.SortOrder
   secretKey?: Prisma.SortOrder
+  webhookSecret?: Prisma.SortOrder
   webhookUrl?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  isPhoneVerified?: Prisma.SortOrder
+  isKycVerified?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  accountName?: Prisma.SortOrder
+  accountNumber?: Prisma.SortOrder
+  routingNumber?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -394,9 +754,27 @@ export type MerchantMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  businessName?: Prisma.SortOrder
+  businessType?: Prisma.SortOrder
+  tradeLicense?: Prisma.SortOrder
+  businessRegNo?: Prisma.SortOrder
+  tinNo?: Prisma.SortOrder
+  businessAddress?: Prisma.SortOrder
+  businessWebsite?: Prisma.SortOrder
+  businessCategory?: Prisma.SortOrder
   apiKey?: Prisma.SortOrder
   secretKey?: Prisma.SortOrder
+  webhookSecret?: Prisma.SortOrder
   webhookUrl?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  isPhoneVerified?: Prisma.SortOrder
+  isKycVerified?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  accountName?: Prisma.SortOrder
+  accountNumber?: Prisma.SortOrder
+  routingNumber?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -406,9 +784,27 @@ export type MerchantMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  businessName?: Prisma.SortOrder
+  businessType?: Prisma.SortOrder
+  tradeLicense?: Prisma.SortOrder
+  businessRegNo?: Prisma.SortOrder
+  tinNo?: Prisma.SortOrder
+  businessAddress?: Prisma.SortOrder
+  businessWebsite?: Prisma.SortOrder
+  businessCategory?: Prisma.SortOrder
   apiKey?: Prisma.SortOrder
   secretKey?: Prisma.SortOrder
+  webhookSecret?: Prisma.SortOrder
   webhookUrl?: Prisma.SortOrder
+  isEmailVerified?: Prisma.SortOrder
+  isPhoneVerified?: Prisma.SortOrder
+  isKycVerified?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  bankName?: Prisma.SortOrder
+  accountName?: Prisma.SortOrder
+  accountNumber?: Prisma.SortOrder
+  routingNumber?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -429,6 +825,10 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type EnumMerchantStatusFieldUpdateOperationsInput = {
+  set?: $Enums.MerchantStatus
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -481,9 +881,27 @@ export type MerchantCreateWithoutPaymentSessionsInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -495,9 +913,27 @@ export type MerchantUncheckedCreateWithoutPaymentSessionsInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -525,9 +961,27 @@ export type MerchantUpdateWithoutPaymentSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -539,9 +993,27 @@ export type MerchantUncheckedUpdateWithoutPaymentSessionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -553,9 +1025,27 @@ export type MerchantCreateWithoutTransactionsInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -567,9 +1057,27 @@ export type MerchantUncheckedCreateWithoutTransactionsInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -597,9 +1105,27 @@ export type MerchantUpdateWithoutTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -611,9 +1137,27 @@ export type MerchantUncheckedUpdateWithoutTransactionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -625,9 +1169,27 @@ export type MerchantCreateWithoutWebhookLogsInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -639,9 +1201,27 @@ export type MerchantUncheckedCreateWithoutWebhookLogsInput = {
   id?: string
   name: string
   email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
   apiKey: string
   secretKey: string
+  webhookSecret?: string | null
   webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -669,9 +1249,27 @@ export type MerchantUpdateWithoutWebhookLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -683,9 +1281,27 @@ export type MerchantUncheckedUpdateWithoutWebhookLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
   apiKey?: Prisma.StringFieldUpdateOperationsInput | string
   secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -746,9 +1362,27 @@ export type MerchantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   id?: boolean
   name?: boolean
   email?: boolean
+  phone?: boolean
+  businessName?: boolean
+  businessType?: boolean
+  tradeLicense?: boolean
+  businessRegNo?: boolean
+  tinNo?: boolean
+  businessAddress?: boolean
+  businessWebsite?: boolean
+  businessCategory?: boolean
   apiKey?: boolean
   secretKey?: boolean
+  webhookSecret?: boolean
   webhookUrl?: boolean
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: boolean
+  bankName?: boolean
+  accountName?: boolean
+  accountNumber?: boolean
+  routingNumber?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -762,9 +1396,27 @@ export type MerchantSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   name?: boolean
   email?: boolean
+  phone?: boolean
+  businessName?: boolean
+  businessType?: boolean
+  tradeLicense?: boolean
+  businessRegNo?: boolean
+  tinNo?: boolean
+  businessAddress?: boolean
+  businessWebsite?: boolean
+  businessCategory?: boolean
   apiKey?: boolean
   secretKey?: boolean
+  webhookSecret?: boolean
   webhookUrl?: boolean
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: boolean
+  bankName?: boolean
+  accountName?: boolean
+  accountNumber?: boolean
+  routingNumber?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -774,9 +1426,27 @@ export type MerchantSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   id?: boolean
   name?: boolean
   email?: boolean
+  phone?: boolean
+  businessName?: boolean
+  businessType?: boolean
+  tradeLicense?: boolean
+  businessRegNo?: boolean
+  tinNo?: boolean
+  businessAddress?: boolean
+  businessWebsite?: boolean
+  businessCategory?: boolean
   apiKey?: boolean
   secretKey?: boolean
+  webhookSecret?: boolean
   webhookUrl?: boolean
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: boolean
+  bankName?: boolean
+  accountName?: boolean
+  accountNumber?: boolean
+  routingNumber?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -786,15 +1456,33 @@ export type MerchantSelectScalar = {
   id?: boolean
   name?: boolean
   email?: boolean
+  phone?: boolean
+  businessName?: boolean
+  businessType?: boolean
+  tradeLicense?: boolean
+  businessRegNo?: boolean
+  tinNo?: boolean
+  businessAddress?: boolean
+  businessWebsite?: boolean
+  businessCategory?: boolean
   apiKey?: boolean
   secretKey?: boolean
+  webhookSecret?: boolean
   webhookUrl?: boolean
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: boolean
+  bankName?: boolean
+  accountName?: boolean
+  accountNumber?: boolean
+  routingNumber?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MerchantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "apiKey" | "secretKey" | "webhookUrl" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["merchant"]>
+export type MerchantOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "phone" | "businessName" | "businessType" | "tradeLicense" | "businessRegNo" | "tinNo" | "businessAddress" | "businessWebsite" | "businessCategory" | "apiKey" | "secretKey" | "webhookSecret" | "webhookUrl" | "isEmailVerified" | "isPhoneVerified" | "isKycVerified" | "status" | "bankName" | "accountName" | "accountNumber" | "routingNumber" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["merchant"]>
 export type MerchantInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   paymentSessions?: boolean | Prisma.Merchant$paymentSessionsArgs<ExtArgs>
   transactions?: boolean | Prisma.Merchant$transactionsArgs<ExtArgs>
@@ -815,9 +1503,27 @@ export type $MerchantPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     name: string
     email: string
+    phone: string
+    businessName: string
+    businessType: string
+    tradeLicense: string
+    businessRegNo: string | null
+    tinNo: string | null
+    businessAddress: string
+    businessWebsite: string | null
+    businessCategory: string
     apiKey: string
     secretKey: string
+    webhookSecret: string | null
     webhookUrl: string | null
+    isEmailVerified: boolean
+    isPhoneVerified: boolean
+    isKycVerified: boolean
+    status: $Enums.MerchantStatus
+    bankName: string | null
+    accountName: string | null
+    accountNumber: string | null
+    routingNumber: string | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -1250,9 +1956,27 @@ export interface MerchantFieldRefs {
   readonly id: Prisma.FieldRef<"Merchant", 'String'>
   readonly name: Prisma.FieldRef<"Merchant", 'String'>
   readonly email: Prisma.FieldRef<"Merchant", 'String'>
+  readonly phone: Prisma.FieldRef<"Merchant", 'String'>
+  readonly businessName: Prisma.FieldRef<"Merchant", 'String'>
+  readonly businessType: Prisma.FieldRef<"Merchant", 'String'>
+  readonly tradeLicense: Prisma.FieldRef<"Merchant", 'String'>
+  readonly businessRegNo: Prisma.FieldRef<"Merchant", 'String'>
+  readonly tinNo: Prisma.FieldRef<"Merchant", 'String'>
+  readonly businessAddress: Prisma.FieldRef<"Merchant", 'String'>
+  readonly businessWebsite: Prisma.FieldRef<"Merchant", 'String'>
+  readonly businessCategory: Prisma.FieldRef<"Merchant", 'String'>
   readonly apiKey: Prisma.FieldRef<"Merchant", 'String'>
   readonly secretKey: Prisma.FieldRef<"Merchant", 'String'>
+  readonly webhookSecret: Prisma.FieldRef<"Merchant", 'String'>
   readonly webhookUrl: Prisma.FieldRef<"Merchant", 'String'>
+  readonly isEmailVerified: Prisma.FieldRef<"Merchant", 'Boolean'>
+  readonly isPhoneVerified: Prisma.FieldRef<"Merchant", 'Boolean'>
+  readonly isKycVerified: Prisma.FieldRef<"Merchant", 'Boolean'>
+  readonly status: Prisma.FieldRef<"Merchant", 'MerchantStatus'>
+  readonly bankName: Prisma.FieldRef<"Merchant", 'String'>
+  readonly accountName: Prisma.FieldRef<"Merchant", 'String'>
+  readonly accountNumber: Prisma.FieldRef<"Merchant", 'String'>
+  readonly routingNumber: Prisma.FieldRef<"Merchant", 'String'>
   readonly isActive: Prisma.FieldRef<"Merchant", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Merchant", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Merchant", 'DateTime'>

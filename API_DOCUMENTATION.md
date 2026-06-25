@@ -226,7 +226,7 @@ Authorization: Bearer <access_token>
 curl -X POST http://localhost:3000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "email": "contact@techsolutions.com",
+    "email": "contact@joypay.com",
     "secretKey": "sk_live_your_secret_key"
   }'
 ```
@@ -240,7 +240,7 @@ curl -X POST http://localhost:3000/api/v1/auth/login \
   "data": {
     "accessToken": "eyJhbGciOiJIUzI1NiIs...",
     "merchantId": "uuid",
-    "email": "contact@techsolutions.com",
+    "email": "contact@joypay.com",
     "name": "Tech Solutions Ltd"
   }
 }
