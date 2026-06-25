@@ -8,7 +8,7 @@ Secure, scalable, and developer-friendly payment processing built with NestJS, P
 
 <p align="center">
   <a href="./API_DOCUMENTATION.md">
-    <img src="https://img.shields.io/badge/Documentation-000000?style=for-the-badge&logo=gitbook&logoColor=white" />
+    <img src="https://img.shields.io/badge/Documentation-0096FF?style=for-the-badge&logo=gitbook&logoColor=white" />
   </a>
   <a href="http://localhost:3000/docs">
     <img src="https://img.shields.io/badge/Swagger-16A34A?style=for-the-badge&logo=rocket&logoColor=white" />
