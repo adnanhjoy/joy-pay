@@ -55,6 +55,18 @@ export class ApiKeyAuthGuard implements CanActivate {
     // Verify HMAC signature
     const rawBody =
       (request['rawBody'] as string) || JSON.stringify(request.body);
+    const expectedSignature = HmacUtil.generateSignature(
+      rawBody,
+      timestamp,
+      merchant.secretKey,
+    );
+    console.debug('--- HMAC Debug ---');
+    console.debug('Timestamp:', timestamp);
+    console.debug('Raw body:', rawBody);
+    console.debug('Data to sign (rawBody + timestamp):', rawBody + timestamp);
+    console.debug('Expected signature:', expectedSignature);
+    console.debug('Received signature:', signatureHeader);
+    console.debug('--- End HMAC Debug ---');
     const isValidSignature = HmacUtil.verifySignature(
       rawBody,
       timestamp,

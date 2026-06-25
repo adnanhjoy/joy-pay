@@ -41,10 +41,14 @@ export class HmacUtil {
       timestamp,
       secretKey,
     );
-    return crypto.timingSafeEqual(
-      Buffer.from(signature, 'base64'),
-      Buffer.from(expectedSignature, 'base64'),
-    );
+    try {
+      return crypto.timingSafeEqual(
+        Buffer.from(signature),
+        Buffer.from(expectedSignature),
+      );
+    } catch {
+      return false;
+    }
   }
 
   /**
