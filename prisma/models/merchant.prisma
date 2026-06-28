@@ -39,6 +39,7 @@ model Merchant {
   paymentSessions  PaymentSession[]
   transactions     Transaction[]
   webhookLogs      WebhookLog[]
+  fraudRules       FraudRule[]
 
   @@index([apiKey])
   @@index([email])

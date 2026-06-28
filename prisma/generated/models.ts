@@ -8,6 +8,8 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/FraudCheck.js'
+export type * from './models/FraudRule.js'
 export type * from './models/Merchant.js'
 export type * from './models/PaymentSession.js'
 export type * from './models/Transaction.js'

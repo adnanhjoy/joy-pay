@@ -1,4 +1,5 @@
 {
+  "exclude": ["checkout-widget", "dist", "node_modules"],
   "compilerOptions": {
     "module": "nodenext",
     "moduleResolution": "nodenext",

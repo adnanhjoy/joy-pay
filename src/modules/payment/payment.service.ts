@@ -3,11 +3,15 @@ import {
   Logger,
   NotFoundException,
   BadRequestException,
+  forwardRef,
+  Inject,
 } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service.js';
 import { ProviderFactory, ProviderType } from '../provider/provider.factory.js';
 import { TransactionService } from '../transaction/transaction.service.js';
 import { WebhookService } from '../webhook/webhook.service.js';
+import { FraudService } from '../fraud/fraud.service.js';
+import type { FraudContext } from '../fraud/interfaces/fraud.interface.js';
 
 @Injectable()
 export class PaymentService {
@@ -18,40 +22,45 @@ export class PaymentService {
     private providerFactory: ProviderFactory,
     private transactionService: TransactionService,
     private webhookService: WebhookService,
+    @Inject(forwardRef(() => FraudService))
+    private fraudService: FraudService,
   ) {}
 
-  /**
-   * Create a payment session and initiate payment
-   */
   async createPayment(
     merchantId: string,
     amount: number,
     currency: string,
-    provider: ProviderType,
+    provider?: ProviderType,
     customerName?: string,
     customerEmail?: string,
     description?: string,
   ) {
-    // Validate provider
-    const availableProviders = this.providerFactory.getAvailableProviders();
-    if (!availableProviders.includes(provider)) {
-      throw new BadRequestException(`Invalid provider: ${provider}`);
-    }
-
-    // Create payment session
     const session = await this.prisma.paymentSession.create({
       data: {
         merchantId,
         amount,
         currency,
-        status: 'INITIATED',
+        status: provider ? 'PENDING' : 'INITIATED',
         customerName,
         customerEmail,
         description,
+        metadata: {
+          providerRequired: !provider,
+          createdAt: new Date().toISOString(),
+        } as never,
       },
     });
 
-    // Create transaction record
+    if (!provider) {
+      this.logger.log(`Payment session created (no provider): ${session.id}`);
+      return {
+        sessionId: session.id,
+        status: 'initiated',
+        message: 'Payment session created. Select a payment method to continue.',
+        availableProviders: this.providerFactory.getRealProviders(),
+      };
+    }
+
     const transaction = await this.transactionService.createTransaction(
       merchantId,
       session.id,
@@ -59,27 +68,54 @@ export class PaymentService {
       provider,
     );
 
-    try {
-      // Update session status to pending
-      await this.prisma.paymentSession.update({
-        where: { id: session.id },
-        data: { status: 'PENDING' },
-      });
+    await this.prisma.paymentSession.update({
+      where: { id: session.id },
+      data: { status: 'PENDING' },
+    });
 
-      // Update transaction status to pending
+    await this.transactionService.updateTransactionStatus(transaction.id, 'PENDING');
+
+    const fraudContext: FraudContext = {
+      amount,
+      currency,
+      merchantId,
+      sessionId: session.id,
+      transactionId: transaction.id,
+      customerName,
+      customerEmail,
+    };
+
+    const fraudResult = await this.fraudService.evaluatePayment(fraudContext);
+
+    if (fraudResult.decision === 'BLOCK') {
       await this.transactionService.updateTransactionStatus(
         transaction.id,
-        'PENDING',
+        'FAILED',
+        undefined,
+        `Fraud block: score ${fraudResult.riskScore}`,
       );
+      await this.prisma.paymentSession.update({
+        where: { id: session.id },
+        data: { status: 'FAILED' },
+      });
+      throw new BadRequestException({
+        message: 'Payment blocked by fraud detection',
+        riskScore: fraudResult.riskScore,
+      });
+    }
 
-      // Process payment with mock provider
+    try {
       const providerResponse = await this.providerFactory.processPayment(
         provider,
         amount,
         merchantId,
+        {
+          customerName,
+          customerEmail,
+          isSandbox: !this.providerFactory.isRealProvider(provider),
+        },
       );
 
-      // Update transaction based on provider response
       const finalStatus = providerResponse.success ? 'SUCCESS' : 'FAILED';
       await this.transactionService.updateTransactionStatus(
         transaction.id,
@@ -88,13 +124,11 @@ export class PaymentService {
         providerResponse.success ? undefined : providerResponse.message,
       );
 
-      // Update session status
       await this.prisma.paymentSession.update({
         where: { id: session.id },
         data: { status: finalStatus },
       });
 
-      // Send webhook notification
       if (providerResponse.success) {
         await this.webhookService.sendPaymentSuccess(
           merchantId,
@@ -116,16 +150,16 @@ export class PaymentService {
       return {
         sessionId: session.id,
         transactionId: transaction.id,
-        redirectUrl: `http://localhost:3000/api/v1/payments/${session.id}/result`,
+        redirectUrl: providerResponse.redirectUrl,
         status: finalStatus.toLowerCase(),
         message: providerResponse.message,
+        fraudScore: fraudResult.riskScore,
+        fraudDecision: fraudResult.decision,
       };
     } catch (error: unknown) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Unknown error';
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       this.logger.error(`Payment processing error: ${errorMessage}`);
 
-      // Update transaction status to failed on error
       await this.transactionService.updateTransactionStatus(
         transaction.id,
         'FAILED',
@@ -142,14 +176,234 @@ export class PaymentService {
     }
   }
 
-  /**
-   * Get payment session by ID
-   */
+  async confirmPayment(
+    sessionId: string,
+    merchantId: string,
+    provider: ProviderType,
+    cardDetails?: { cardNumber?: string; cardholderName?: string; expiry?: string; cvv?: string },
+    ip?: string,
+    userAgent?: string,
+  ) {
+    const session = await this.prisma.paymentSession.findUnique({
+      where: { id: sessionId },
+    });
+
+    if (!session) {
+      throw new NotFoundException('Payment session not found');
+    }
+
+    if (session.merchantId !== merchantId) {
+      throw new BadRequestException('Unauthorized');
+    }
+
+    if (session.status !== 'INITIATED') {
+      throw new BadRequestException(`Cannot confirm payment in status: ${session.status}`);
+    }
+
+    const availableProviders = this.providerFactory.getRealProviders();
+    if (!availableProviders.includes(provider)) {
+      throw new BadRequestException(`Invalid provider: ${provider}`);
+    }
+
+    const amount = Number(session.amount);
+
+    const transaction = await this.transactionService.createTransaction(
+      merchantId,
+      sessionId,
+      amount,
+      provider,
+    );
+
+    await this.prisma.paymentSession.update({
+      where: { id: sessionId },
+      data: { status: 'PENDING' },
+    });
+
+    await this.transactionService.updateTransactionStatus(transaction.id, 'PENDING');
+
+    const cardFirst6 = cardDetails?.cardNumber?.substring(0, 6);
+
+    const fraudContext: FraudContext = {
+      amount,
+      currency: session.currency,
+      merchantId,
+      sessionId,
+      transactionId: transaction.id,
+      customerEmail: session.customerEmail ?? undefined,
+      customerName: session.customerName ?? undefined,
+      ip,
+      userAgent,
+      cardFirst6,
+      cardLast4: cardDetails?.cardNumber?.slice(-4),
+    };
+
+    const fraudResult = await this.fraudService.evaluatePayment(fraudContext);
+
+    if (fraudResult.decision === 'BLOCK') {
+      await this.transactionService.updateTransactionStatus(
+        transaction.id,
+        'FAILED',
+        undefined,
+        `Fraud block: score ${fraudResult.riskScore}`,
+      );
+      await this.prisma.paymentSession.update({
+        where: { id: sessionId },
+        data: { status: 'FAILED' },
+      });
+      throw new BadRequestException({
+        message: 'Payment blocked by fraud detection',
+        riskScore: fraudResult.riskScore,
+        fraudChecks: fraudResult.checks,
+      });
+    }
+
+    try {
+      const providerResponse = await this.providerFactory.processPayment(
+        provider,
+        amount,
+        merchantId,
+        {
+          customerName: session.customerName ?? undefined,
+          customerEmail: session.customerEmail ?? undefined,
+          isSandbox: true,
+        },
+      );
+
+      if (providerResponse.redirectUrl) {
+        await this.transactionService.updateTransactionStatus(
+          transaction.id,
+          'PENDING',
+          providerResponse.providerTransactionId,
+        );
+
+        return {
+          sessionId,
+          transactionId: transaction.id,
+          redirectUrl: providerResponse.redirectUrl,
+          status: 'pending',
+          message: providerResponse.message,
+          fraudScore: fraudResult.riskScore,
+          fraudDecision: fraudResult.decision,
+        };
+      }
+
+      const finalStatus = providerResponse.success ? 'SUCCESS' : 'FAILED';
+      await this.transactionService.updateTransactionStatus(
+        transaction.id,
+        finalStatus,
+        providerResponse.providerTransactionId,
+        providerResponse.success ? undefined : providerResponse.message,
+      );
+
+      await this.prisma.paymentSession.update({
+        where: { id: sessionId },
+        data: { status: finalStatus },
+      });
+
+      if (providerResponse.success) {
+        await this.webhookService.sendPaymentSuccess(
+          merchantId,
+          transaction.id,
+          amount,
+          provider,
+          providerResponse.providerTransactionId,
+        );
+      } else {
+        await this.webhookService.sendPaymentFailed(
+          merchantId,
+          transaction.id,
+          amount,
+          provider,
+          providerResponse.message || 'Payment failed',
+        );
+      }
+
+      return {
+        sessionId,
+        transactionId: transaction.id,
+        status: finalStatus.toLowerCase(),
+        message: providerResponse.message,
+        fraudScore: fraudResult.riskScore,
+        fraudDecision: fraudResult.decision,
+      };
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      this.logger.error(`Payment confirm error: ${errorMessage}`);
+
+      await this.transactionService.updateTransactionStatus(
+        transaction.id,
+        'FAILED',
+        undefined,
+        errorMessage,
+      );
+
+      await this.prisma.paymentSession.update({
+        where: { id: sessionId },
+        data: { status: 'FAILED' },
+      });
+
+      throw error;
+    }
+  }
+
+  async completeProviderPayment(
+    provider: string,
+    providerTransactionId: string,
+    success: boolean,
+  ) {
+    const transaction = await this.prisma.transaction.findFirst({
+      where: {
+        provider,
+        providerTransactionId,
+      },
+    });
+
+    if (!transaction) {
+      this.logger.warn(`No transaction found for ${provider}:${providerTransactionId}`);
+      return;
+    }
+
+    const finalStatus = success ? 'SUCCESS' : 'FAILED';
+
+    await this.transactionService.updateTransactionStatus(
+      transaction.id,
+      finalStatus,
+      providerTransactionId,
+    );
+
+    await this.prisma.paymentSession.update({
+      where: { id: transaction.sessionId },
+      data: { status: finalStatus },
+    });
+
+    if (success) {
+      await this.webhookService.sendPaymentSuccess(
+        transaction.merchantId,
+        transaction.id,
+        Number(transaction.amount),
+        provider,
+        providerTransactionId,
+      );
+    } else {
+      await this.webhookService.sendPaymentFailed(
+        transaction.merchantId,
+        transaction.id,
+        Number(transaction.amount),
+        provider,
+        'Payment failed at provider',
+      );
+    }
+
+    this.logger.log(`Provider payment completed: ${provider}:${providerTransactionId} -> ${finalStatus}`);
+  }
+
   async getPaymentSession(id: string) {
     const session = await this.prisma.paymentSession.findUnique({
       where: { id },
       include: {
-        transactions: true,
+        transactions: {
+          include: { fraudCheck: true },
+        },
       },
     });
 
@@ -163,9 +417,6 @@ export class PaymentService {
     };
   }
 
-  /**
-   * Cancel a payment session
-   */
   async cancelPayment(id: string, merchantId: string) {
     const session = await this.prisma.paymentSession.findUnique({
       where: { id },
@@ -183,19 +434,16 @@ export class PaymentService {
       throw new BadRequestException('Cannot cancel completed payment');
     }
 
-    // Update session status
     const updatedSession = await this.prisma.paymentSession.update({
       where: { id },
       data: { status: 'CANCELLED' },
     });
 
-    // Update associated transactions
     await this.prisma.transaction.updateMany({
       where: { sessionId: id, status: { in: ['INITIATED', 'PENDING'] } },
       data: { status: 'CANCELLED' },
     });
 
-    // Send cancel webhook
     await this.webhookService.sendWebhook(merchantId, 'payment.cancelled', {
       event: 'payment.cancelled',
       sessionId: id,
@@ -209,9 +457,6 @@ export class PaymentService {
     };
   }
 
-  /**
-   * List payment sessions for a merchant
-   */
   async listPaymentSessions(
     merchantId: string,
     limit: number = 50,
@@ -222,6 +467,11 @@ export class PaymentService {
       skip: offset,
       take: limit,
       orderBy: { createdAt: 'desc' },
+      include: {
+        transactions: {
+          include: { fraudCheck: true },
+        },
+      },
     });
 
     return sessions.map((s) => ({

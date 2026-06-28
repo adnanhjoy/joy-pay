@@ -4,11 +4,14 @@ import {
   PaymentProviderResponse,
   PaymentProviderConfig,
 } from './interfaces/payment-provider.interface.js';
+import { ConfigService } from '@nestjs/config';
+import { BkashProvider } from './bkash.provider.js';
+import { NagadProvider } from './nagad.provider.js';
 import { MockBkashProvider } from './mock-bkash.provider.js';
 import { MockNagadProvider } from './mock-nagad.provider.js';
 import { MockCardProvider } from './mock-card.provider.js';
 
-export type ProviderType = 'bkash' | 'nagad' | 'card';
+export type ProviderType = 'bkash' | 'nagad' | 'mock_bkash' | 'mock_nagad' | 'mock_card';
 
 @Injectable()
 export class ProviderFactory {
@@ -16,14 +19,19 @@ export class ProviderFactory {
   private readonly providers: Map<string, PaymentProvider>;
 
   constructor(
-    private readonly bkashProvider: MockBkashProvider,
-    private readonly nagadProvider: MockNagadProvider,
-    private readonly cardProvider: MockCardProvider,
+    private readonly bkashProvider: BkashProvider,
+    private readonly nagadProvider: NagadProvider,
+    private readonly mockBkashProvider: MockBkashProvider,
+    private readonly mockNagadProvider: MockNagadProvider,
+    private readonly mockCardProvider: MockCardProvider,
+    private readonly config: ConfigService,
   ) {
     this.providers = new Map<string, PaymentProvider>([
       ['bkash', bkashProvider],
       ['nagad', nagadProvider],
-      ['card', cardProvider],
+      ['mock_bkash', mockBkashProvider],
+      ['mock_nagad', mockNagadProvider],
+      ['mock_card', mockCardProvider],
     ]);
   }
 
@@ -46,6 +54,18 @@ export class ProviderFactory {
   }
 
   getAvailableProviders(): ProviderType[] {
-    return Array.from(this.providers.keys()) as ProviderType[];
+    const isSandbox = this.config.get<string>('PAYMENT_SANDBOX') !== 'false';
+    if (isSandbox) {
+      return ['mock_bkash', 'mock_nagad', 'mock_card'];
+    }
+    return ['bkash', 'nagad'];
+  }
+
+  getRealProviders(): ProviderType[] {
+    return ['bkash', 'nagad'];
+  }
+
+  isRealProvider(providerType: string): boolean {
+    return ['bkash', 'nagad'].includes(providerType);
   }
 }

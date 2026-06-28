@@ -1,0 +1,16 @@
+model FraudRule {
+  id         String   @id @default(uuid())
+  merchantId String
+  ruleType   String   // VELOCITY | AMOUNT_THRESHOLD | BIN_BLOCK | TIME_RESTRICTION | IP_COUNTRY_MISMATCH
+  enabled    Boolean  @default(true)
+  priority   Int      @default(0)
+  config     Json     // { maxAttempts: 5, timeWindowMin: 10, maxAmount: 100000, blockedBins: [...], ... }
+  action     FraudAction @default(FLAG)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  merchant   Merchant @relation(fields: [merchantId], references: [id])
+
+  @@index([merchantId])
+  @@map("fraud_rules")
+}

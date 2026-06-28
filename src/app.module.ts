@@ -7,6 +7,7 @@ import { TransactionModule } from './modules/transaction/transaction.module.js';
 import { ProviderModule } from './modules/provider/provider.module.js';
 import { WebhookModule } from './modules/webhook/webhook.module.js';
 import { DatabaseModule } from './database/database.module.js';
+import { FraudModule } from './modules/fraud/fraud.module.js';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DatabaseModule } from './database/database.module.js';
     TransactionModule,
     ProviderModule,
     WebhookModule,
+    FraudModule,
   ],
   controllers: [],
   providers: [],

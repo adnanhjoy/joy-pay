@@ -51,6 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  FraudCheck: 'FraudCheck',
+  FraudRule: 'FraudRule',
   Merchant: 'Merchant',
   PaymentSession: 'PaymentSession',
   Transaction: 'Transaction',
@@ -71,6 +73,34 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+export const FraudCheckScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  riskScore: 'riskScore',
+  decision: 'decision',
+  checks: 'checks',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type FraudCheckScalarFieldEnum = (typeof FraudCheckScalarFieldEnum)[keyof typeof FraudCheckScalarFieldEnum]
+
+
+export const FraudRuleScalarFieldEnum = {
+  id: 'id',
+  merchantId: 'merchantId',
+  ruleType: 'ruleType',
+  enabled: 'enabled',
+  priority: 'priority',
+  config: 'config',
+  action: 'action',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FraudRuleScalarFieldEnum = (typeof FraudRuleScalarFieldEnum)[keyof typeof FraudRuleScalarFieldEnum]
 
 
 export const MerchantScalarFieldEnum = {
@@ -163,19 +193,19 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -186,14 +216,6 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -201,4 +223,12 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

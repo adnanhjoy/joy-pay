@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const FraudAction = {
+  ALLOW: 'ALLOW',
+  FLAG: 'FLAG',
+  BLOCK: 'BLOCK'
+} as const
+
+export type FraudAction = (typeof FraudAction)[keyof typeof FraudAction]
+
+
 export const MerchantStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',

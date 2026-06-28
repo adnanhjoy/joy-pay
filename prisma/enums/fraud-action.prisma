@@ -1,0 +1,5 @@
+enum FraudAction {
+  ALLOW
+  FLAG
+  BLOCK
+}

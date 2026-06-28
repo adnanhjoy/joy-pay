@@ -384,6 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
+  FraudCheck: 'FraudCheck',
+  FraudRule: 'FraudRule',
   Merchant: 'Merchant',
   PaymentSession: 'PaymentSession',
   Transaction: 'Transaction',
@@ -403,10 +405,158 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "merchant" | "paymentSession" | "transaction" | "webhookLog"
+    modelProps: "fraudCheck" | "fraudRule" | "merchant" | "paymentSession" | "transaction" | "webhookLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
+    FraudCheck: {
+      payload: Prisma.$FraudCheckPayload<ExtArgs>
+      fields: Prisma.FraudCheckFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FraudCheckFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FraudCheckFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>
+        }
+        findFirst: {
+          args: Prisma.FraudCheckFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FraudCheckFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>
+        }
+        findMany: {
+          args: Prisma.FraudCheckFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>[]
+        }
+        create: {
+          args: Prisma.FraudCheckCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>
+        }
+        createMany: {
+          args: Prisma.FraudCheckCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FraudCheckCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>[]
+        }
+        delete: {
+          args: Prisma.FraudCheckDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>
+        }
+        update: {
+          args: Prisma.FraudCheckUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>
+        }
+        deleteMany: {
+          args: Prisma.FraudCheckDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FraudCheckUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FraudCheckUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>[]
+        }
+        upsert: {
+          args: Prisma.FraudCheckUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudCheckPayload>
+        }
+        aggregate: {
+          args: Prisma.FraudCheckAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFraudCheck>
+        }
+        groupBy: {
+          args: Prisma.FraudCheckGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FraudCheckGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FraudCheckCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FraudCheckCountAggregateOutputType> | number
+        }
+      }
+    }
+    FraudRule: {
+      payload: Prisma.$FraudRulePayload<ExtArgs>
+      fields: Prisma.FraudRuleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FraudRuleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FraudRuleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>
+        }
+        findFirst: {
+          args: Prisma.FraudRuleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FraudRuleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>
+        }
+        findMany: {
+          args: Prisma.FraudRuleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>[]
+        }
+        create: {
+          args: Prisma.FraudRuleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>
+        }
+        createMany: {
+          args: Prisma.FraudRuleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FraudRuleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>[]
+        }
+        delete: {
+          args: Prisma.FraudRuleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>
+        }
+        update: {
+          args: Prisma.FraudRuleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>
+        }
+        deleteMany: {
+          args: Prisma.FraudRuleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FraudRuleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FraudRuleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>[]
+        }
+        upsert: {
+          args: Prisma.FraudRuleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FraudRulePayload>
+        }
+        aggregate: {
+          args: Prisma.FraudRuleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFraudRule>
+        }
+        groupBy: {
+          args: Prisma.FraudRuleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FraudRuleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FraudRuleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FraudRuleCountAggregateOutputType> | number
+        }
+      }
+    }
     Merchant: {
       payload: Prisma.$MerchantPayload<ExtArgs>
       fields: Prisma.MerchantFieldRefs
@@ -742,6 +892,34 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const FraudCheckScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  riskScore: 'riskScore',
+  decision: 'decision',
+  checks: 'checks',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type FraudCheckScalarFieldEnum = (typeof FraudCheckScalarFieldEnum)[keyof typeof FraudCheckScalarFieldEnum]
+
+
+export const FraudRuleScalarFieldEnum = {
+  id: 'id',
+  merchantId: 'merchantId',
+  ruleType: 'ruleType',
+  enabled: 'enabled',
+  priority: 'priority',
+  config: 'config',
+  action: 'action',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FraudRuleScalarFieldEnum = (typeof FraudRuleScalarFieldEnum)[keyof typeof FraudRuleScalarFieldEnum]
+
+
 export const MerchantScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -832,19 +1010,19 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const NullableJsonNullValueInput = {
   DbNull: DbNull,
   JsonNull: JsonNull
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
-
-export const JsonNullValueInput = {
-  JsonNull: JsonNull
-} as const
-
-export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -855,14 +1033,6 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -870,6 +1040,14 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 
@@ -893,6 +1071,62 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FraudAction'
+ */
+export type EnumFraudActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FraudAction'>
+    
+
+
+/**
+ * Reference to a field of type 'FraudAction[]'
+ */
+export type ListEnumFraudActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FraudAction[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -910,20 +1144,6 @@ export type EnumMerchantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'MerchantStatus[]'
  */
 export type ListEnumMerchantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MerchantStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime'
- */
-export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'DateTime[]'
- */
-export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -956,20 +1176,6 @@ export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType
 
 
 /**
- * Reference to a field of type 'Json'
- */
-export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-/**
- * Reference to a field of type 'QueryMode'
- */
-export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
  * Reference to a field of type 'TransactionStatus'
  */
 export type EnumTransactionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionStatus'>
@@ -994,20 +1200,6 @@ export type EnumWebhookStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pr
  * Reference to a field of type 'WebhookStatus[]'
  */
 export type ListEnumWebhookStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'WebhookStatus[]'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -1134,6 +1326,8 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
+  fraudCheck?: Prisma.FraudCheckOmit
+  fraudRule?: Prisma.FraudRuleOmit
   merchant?: Prisma.MerchantOmit
   paymentSession?: Prisma.PaymentSessionOmit
   transaction?: Prisma.TransactionOmit

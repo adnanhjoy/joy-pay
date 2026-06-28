@@ -18,6 +18,16 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
+ * Model FraudCheck
+ * 
+ */
+export type FraudCheck = Prisma.FraudCheckModel
+/**
+ * Model FraudRule
+ * 
+ */
+export type FraudRule = Prisma.FraudRuleModel
+/**
  * Model Merchant
  * 
  */

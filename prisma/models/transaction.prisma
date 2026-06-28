@@ -13,6 +13,7 @@ model Transaction {
   // Relations
   merchant    Merchant     @relation(fields: [merchantId], references: [id])
   session   PaymentSession @relation(fields: [sessionId], references: [id])
+  fraudCheck FraudCheck?
 
   @@index([merchantId])
   @@index([sessionId])

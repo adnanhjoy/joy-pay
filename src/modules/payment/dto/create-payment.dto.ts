@@ -7,7 +7,7 @@ import {
   IsOptional,
   IsEnum,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import type { ProviderType } from '../../provider/provider.factory.js';
 
 export class CreatePaymentDto {
@@ -16,27 +16,27 @@ export class CreatePaymentDto {
   @IsPositive()
   amount!: number;
 
-  @ApiProperty({ example: 'BDT', default: 'BDT' })
+  @ApiPropertyOptional({ example: 'BDT', default: 'BDT' })
   @IsString()
   @IsOptional()
   currency?: string;
 
-  @ApiProperty({ example: 'John Doe' })
+  @ApiPropertyOptional({ example: 'John Doe' })
   @IsString()
   @IsOptional()
   customerName?: string;
 
-  @ApiProperty({ example: 'john@example.com' })
+  @ApiPropertyOptional({ example: 'john@example.com' })
   @IsEmail()
   @IsOptional()
   customerEmail?: string;
 
-  @ApiProperty({ example: 'bkash', enum: ['bkash', 'nagad', 'card'] })
-  @IsEnum(['bkash', 'nagad', 'card'])
-  @IsNotEmpty()
-  provider!: ProviderType;
+  @ApiPropertyOptional({ example: 'bkash', enum: ['bkash', 'nagad', 'mock_bkash', 'mock_nagad', 'mock_card'] })
+  @IsEnum(['bkash', 'nagad', 'mock_bkash', 'mock_nagad', 'mock_card'])
+  @IsOptional()
+  provider?: ProviderType;
 
-  @ApiProperty({ required: false })
+  @ApiPropertyOptional()
   @IsString()
   @IsOptional()
   description?: string;

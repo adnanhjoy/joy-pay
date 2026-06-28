@@ -258,6 +258,7 @@ export type TransactionWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   merchant?: Prisma.XOR<Prisma.MerchantScalarRelationFilter, Prisma.MerchantWhereInput>
   session?: Prisma.XOR<Prisma.PaymentSessionScalarRelationFilter, Prisma.PaymentSessionWhereInput>
+  fraudCheck?: Prisma.XOR<Prisma.FraudCheckNullableScalarRelationFilter, Prisma.FraudCheckWhereInput> | null
 }
 
 export type TransactionOrderByWithRelationInput = {
@@ -273,6 +274,7 @@ export type TransactionOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   merchant?: Prisma.MerchantOrderByWithRelationInput
   session?: Prisma.PaymentSessionOrderByWithRelationInput
+  fraudCheck?: Prisma.FraudCheckOrderByWithRelationInput
 }
 
 export type TransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -291,6 +293,7 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Transaction"> | Date | string
   merchant?: Prisma.XOR<Prisma.MerchantScalarRelationFilter, Prisma.MerchantWhereInput>
   session?: Prisma.XOR<Prisma.PaymentSessionScalarRelationFilter, Prisma.PaymentSessionWhereInput>
+  fraudCheck?: Prisma.XOR<Prisma.FraudCheckNullableScalarRelationFilter, Prisma.FraudCheckWhereInput> | null
 }, "id">
 
 export type TransactionOrderByWithAggregationInput = {
@@ -338,6 +341,7 @@ export type TransactionCreateInput = {
   updatedAt?: Date | string
   merchant: Prisma.MerchantCreateNestedOneWithoutTransactionsInput
   session: Prisma.PaymentSessionCreateNestedOneWithoutTransactionsInput
+  fraudCheck?: Prisma.FraudCheckCreateNestedOneWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateInput = {
@@ -351,6 +355,7 @@ export type TransactionUncheckedCreateInput = {
   failureReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  fraudCheck?: Prisma.FraudCheckUncheckedCreateNestedOneWithoutTransactionInput
 }
 
 export type TransactionUpdateInput = {
@@ -364,6 +369,7 @@ export type TransactionUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   merchant?: Prisma.MerchantUpdateOneRequiredWithoutTransactionsNestedInput
   session?: Prisma.PaymentSessionUpdateOneRequiredWithoutTransactionsNestedInput
+  fraudCheck?: Prisma.FraudCheckUpdateOneWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateInput = {
@@ -377,6 +383,7 @@ export type TransactionUncheckedUpdateInput = {
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fraudCheck?: Prisma.FraudCheckUncheckedUpdateOneWithoutTransactionNestedInput
 }
 
 export type TransactionCreateManyInput = {
@@ -414,6 +421,11 @@ export type TransactionUncheckedUpdateManyInput = {
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TransactionScalarRelationFilter = {
+  is?: Prisma.TransactionWhereInput
+  isNot?: Prisma.TransactionWhereInput
 }
 
 export type TransactionListRelationFilter = {
@@ -471,6 +483,20 @@ export type TransactionMinOrderByAggregateInput = {
 
 export type TransactionSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+}
+
+export type TransactionCreateNestedOneWithoutFraudCheckInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutFraudCheckInput, Prisma.TransactionUncheckedCreateWithoutFraudCheckInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutFraudCheckInput
+  connect?: Prisma.TransactionWhereUniqueInput
+}
+
+export type TransactionUpdateOneRequiredWithoutFraudCheckNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutFraudCheckInput, Prisma.TransactionUncheckedCreateWithoutFraudCheckInput>
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutFraudCheckInput
+  upsert?: Prisma.TransactionUpsertWithoutFraudCheckInput
+  connect?: Prisma.TransactionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TransactionUpdateToOneWithWhereWithoutFraudCheckInput, Prisma.TransactionUpdateWithoutFraudCheckInput>, Prisma.TransactionUncheckedUpdateWithoutFraudCheckInput>
 }
 
 export type TransactionCreateNestedManyWithoutMerchantInput = {
@@ -561,6 +587,74 @@ export type EnumTransactionStatusFieldUpdateOperationsInput = {
   set?: $Enums.TransactionStatus
 }
 
+export type TransactionCreateWithoutFraudCheckInput = {
+  id?: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.TransactionStatus
+  provider: string
+  providerTransactionId?: string | null
+  failureReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  merchant: Prisma.MerchantCreateNestedOneWithoutTransactionsInput
+  session: Prisma.PaymentSessionCreateNestedOneWithoutTransactionsInput
+}
+
+export type TransactionUncheckedCreateWithoutFraudCheckInput = {
+  id?: string
+  merchantId: string
+  sessionId: string
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: $Enums.TransactionStatus
+  provider: string
+  providerTransactionId?: string | null
+  failureReason?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TransactionCreateOrConnectWithoutFraudCheckInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutFraudCheckInput, Prisma.TransactionUncheckedCreateWithoutFraudCheckInput>
+}
+
+export type TransactionUpsertWithoutFraudCheckInput = {
+  update: Prisma.XOR<Prisma.TransactionUpdateWithoutFraudCheckInput, Prisma.TransactionUncheckedUpdateWithoutFraudCheckInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutFraudCheckInput, Prisma.TransactionUncheckedCreateWithoutFraudCheckInput>
+  where?: Prisma.TransactionWhereInput
+}
+
+export type TransactionUpdateToOneWithWhereWithoutFraudCheckInput = {
+  where?: Prisma.TransactionWhereInput
+  data: Prisma.XOR<Prisma.TransactionUpdateWithoutFraudCheckInput, Prisma.TransactionUncheckedUpdateWithoutFraudCheckInput>
+}
+
+export type TransactionUpdateWithoutFraudCheckInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  merchant?: Prisma.MerchantUpdateOneRequiredWithoutTransactionsNestedInput
+  session?: Prisma.PaymentSessionUpdateOneRequiredWithoutTransactionsNestedInput
+}
+
+export type TransactionUncheckedUpdateWithoutFraudCheckInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  merchantId?: Prisma.StringFieldUpdateOperationsInput | string
+  sessionId?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  status?: Prisma.EnumTransactionStatusFieldUpdateOperationsInput | $Enums.TransactionStatus
+  provider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerTransactionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type TransactionCreateWithoutMerchantInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -571,6 +665,7 @@ export type TransactionCreateWithoutMerchantInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   session: Prisma.PaymentSessionCreateNestedOneWithoutTransactionsInput
+  fraudCheck?: Prisma.FraudCheckCreateNestedOneWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateWithoutMerchantInput = {
@@ -583,6 +678,7 @@ export type TransactionUncheckedCreateWithoutMerchantInput = {
   failureReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  fraudCheck?: Prisma.FraudCheckUncheckedCreateNestedOneWithoutTransactionInput
 }
 
 export type TransactionCreateOrConnectWithoutMerchantInput = {
@@ -637,6 +733,7 @@ export type TransactionCreateWithoutSessionInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   merchant: Prisma.MerchantCreateNestedOneWithoutTransactionsInput
+  fraudCheck?: Prisma.FraudCheckCreateNestedOneWithoutTransactionInput
 }
 
 export type TransactionUncheckedCreateWithoutSessionInput = {
@@ -649,6 +746,7 @@ export type TransactionUncheckedCreateWithoutSessionInput = {
   failureReason?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  fraudCheck?: Prisma.FraudCheckUncheckedCreateNestedOneWithoutTransactionInput
 }
 
 export type TransactionCreateOrConnectWithoutSessionInput = {
@@ -699,6 +797,7 @@ export type TransactionUpdateWithoutMerchantInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   session?: Prisma.PaymentSessionUpdateOneRequiredWithoutTransactionsNestedInput
+  fraudCheck?: Prisma.FraudCheckUpdateOneWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutMerchantInput = {
@@ -711,6 +810,7 @@ export type TransactionUncheckedUpdateWithoutMerchantInput = {
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fraudCheck?: Prisma.FraudCheckUncheckedUpdateOneWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateManyWithoutMerchantInput = {
@@ -747,6 +847,7 @@ export type TransactionUpdateWithoutSessionInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   merchant?: Prisma.MerchantUpdateOneRequiredWithoutTransactionsNestedInput
+  fraudCheck?: Prisma.FraudCheckUpdateOneWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutSessionInput = {
@@ -759,6 +860,7 @@ export type TransactionUncheckedUpdateWithoutSessionInput = {
   failureReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fraudCheck?: Prisma.FraudCheckUncheckedUpdateOneWithoutTransactionNestedInput
 }
 
 export type TransactionUncheckedUpdateManyWithoutSessionInput = {
@@ -788,6 +890,7 @@ export type TransactionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   updatedAt?: boolean
   merchant?: boolean | Prisma.MerchantDefaultArgs<ExtArgs>
   session?: boolean | Prisma.PaymentSessionDefaultArgs<ExtArgs>
+  fraudCheck?: boolean | Prisma.Transaction$fraudCheckArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
 export type TransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -837,6 +940,7 @@ export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type TransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   merchant?: boolean | Prisma.MerchantDefaultArgs<ExtArgs>
   session?: boolean | Prisma.PaymentSessionDefaultArgs<ExtArgs>
+  fraudCheck?: boolean | Prisma.Transaction$fraudCheckArgs<ExtArgs>
 }
 export type TransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   merchant?: boolean | Prisma.MerchantDefaultArgs<ExtArgs>
@@ -852,6 +956,7 @@ export type $TransactionPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     merchant: Prisma.$MerchantPayload<ExtArgs>
     session: Prisma.$PaymentSessionPayload<ExtArgs>
+    fraudCheck: Prisma.$FraudCheckPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1260,6 +1365,7 @@ export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   merchant<T extends Prisma.MerchantDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MerchantDefaultArgs<ExtArgs>>): Prisma.Prisma__MerchantClient<runtime.Types.Result.GetResult<Prisma.$MerchantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   session<T extends Prisma.PaymentSessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PaymentSessionDefaultArgs<ExtArgs>>): Prisma.Prisma__PaymentSessionClient<runtime.Types.Result.GetResult<Prisma.$PaymentSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  fraudCheck<T extends Prisma.Transaction$fraudCheckArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$fraudCheckArgs<ExtArgs>>): Prisma.Prisma__FraudCheckClient<runtime.Types.Result.GetResult<Prisma.$FraudCheckPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1697,6 +1803,25 @@ export type TransactionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many Transactions to delete.
    */
   limit?: number
+}
+
+/**
+ * Transaction.fraudCheck
+ */
+export type Transaction$fraudCheckArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FraudCheck
+   */
+  select?: Prisma.FraudCheckSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FraudCheck
+   */
+  omit?: Prisma.FraudCheckOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FraudCheckInclude<ExtArgs> | null
+  where?: Prisma.FraudCheckWhereInput
 }
 
 /**

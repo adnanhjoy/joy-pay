@@ -1,0 +1,14 @@
+model FraudCheck {
+  id            String   @id @default(uuid())
+  transactionId String   @unique
+  riskScore     Int      // 0-100
+  decision      FraudAction
+  checks        Json     // [{ ruleType: "VELOCITY", score: 20, action: "FLAG", reason: "..." }, ...]
+  metadata      Json?    // { ip, bin, cardCountry, ipCountry, velocityCount, ... }
+  createdAt     DateTime @default(now())
+
+  transaction   Transaction @relation(fields: [transactionId], references: [id])
+
+  @@index([transactionId])
+  @@map("fraud_checks")
+}

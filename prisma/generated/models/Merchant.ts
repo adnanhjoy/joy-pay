@@ -361,6 +361,7 @@ export type MerchantWhereInput = {
   paymentSessions?: Prisma.PaymentSessionListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
   webhookLogs?: Prisma.WebhookLogListRelationFilter
+  fraudRules?: Prisma.FraudRuleListRelationFilter
 }
 
 export type MerchantOrderByWithRelationInput = {
@@ -394,6 +395,7 @@ export type MerchantOrderByWithRelationInput = {
   paymentSessions?: Prisma.PaymentSessionOrderByRelationAggregateInput
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
   webhookLogs?: Prisma.WebhookLogOrderByRelationAggregateInput
+  fraudRules?: Prisma.FraudRuleOrderByRelationAggregateInput
 }
 
 export type MerchantWhereUniqueInput = Prisma.AtLeast<{
@@ -430,6 +432,7 @@ export type MerchantWhereUniqueInput = Prisma.AtLeast<{
   paymentSessions?: Prisma.PaymentSessionListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
   webhookLogs?: Prisma.WebhookLogListRelationFilter
+  fraudRules?: Prisma.FraudRuleListRelationFilter
 }, "id" | "email" | "apiKey">
 
 export type MerchantOrderByWithAggregationInput = {
@@ -529,6 +532,7 @@ export type MerchantCreateInput = {
   paymentSessions?: Prisma.PaymentSessionCreateNestedManyWithoutMerchantInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutMerchantInput
   webhookLogs?: Prisma.WebhookLogCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantUncheckedCreateInput = {
@@ -562,6 +566,7 @@ export type MerchantUncheckedCreateInput = {
   paymentSessions?: Prisma.PaymentSessionUncheckedCreateNestedManyWithoutMerchantInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMerchantInput
   webhookLogs?: Prisma.WebhookLogUncheckedCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleUncheckedCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantUpdateInput = {
@@ -595,6 +600,7 @@ export type MerchantUpdateInput = {
   paymentSessions?: Prisma.PaymentSessionUpdateManyWithoutMerchantNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutMerchantNestedInput
   webhookLogs?: Prisma.WebhookLogUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUpdateManyWithoutMerchantNestedInput
 }
 
 export type MerchantUncheckedUpdateInput = {
@@ -628,6 +634,7 @@ export type MerchantUncheckedUpdateInput = {
   paymentSessions?: Prisma.PaymentSessionUncheckedUpdateManyWithoutMerchantNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMerchantNestedInput
   webhookLogs?: Prisma.WebhookLogUncheckedUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUncheckedUpdateManyWithoutMerchantNestedInput
 }
 
 export type MerchantCreateManyInput = {
@@ -720,6 +727,11 @@ export type MerchantUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type MerchantScalarRelationFilter = {
+  is?: Prisma.MerchantWhereInput
+  isNot?: Prisma.MerchantWhereInput
+}
+
 export type MerchantCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -810,29 +822,26 @@ export type MerchantMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type MerchantScalarRelationFilter = {
-  is?: Prisma.MerchantWhereInput
-  isNot?: Prisma.MerchantWhereInput
+export type MerchantCreateNestedOneWithoutFraudRulesInput = {
+  create?: Prisma.XOR<Prisma.MerchantCreateWithoutFraudRulesInput, Prisma.MerchantUncheckedCreateWithoutFraudRulesInput>
+  connectOrCreate?: Prisma.MerchantCreateOrConnectWithoutFraudRulesInput
+  connect?: Prisma.MerchantWhereUniqueInput
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
+export type MerchantUpdateOneRequiredWithoutFraudRulesNestedInput = {
+  create?: Prisma.XOR<Prisma.MerchantCreateWithoutFraudRulesInput, Prisma.MerchantUncheckedCreateWithoutFraudRulesInput>
+  connectOrCreate?: Prisma.MerchantCreateOrConnectWithoutFraudRulesInput
+  upsert?: Prisma.MerchantUpsertWithoutFraudRulesInput
+  connect?: Prisma.MerchantWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MerchantUpdateToOneWithWhereWithoutFraudRulesInput, Prisma.MerchantUpdateWithoutFraudRulesInput>, Prisma.MerchantUncheckedUpdateWithoutFraudRulesInput>
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type EnumMerchantStatusFieldUpdateOperationsInput = {
   set?: $Enums.MerchantStatus
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
 }
 
 export type MerchantCreateNestedOneWithoutPaymentSessionsInput = {
@@ -877,6 +886,154 @@ export type MerchantUpdateOneRequiredWithoutWebhookLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MerchantUpdateToOneWithWhereWithoutWebhookLogsInput, Prisma.MerchantUpdateWithoutWebhookLogsInput>, Prisma.MerchantUncheckedUpdateWithoutWebhookLogsInput>
 }
 
+export type MerchantCreateWithoutFraudRulesInput = {
+  id?: string
+  name: string
+  email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
+  apiKey: string
+  secretKey: string
+  webhookSecret?: string | null
+  webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  paymentSessions?: Prisma.PaymentSessionCreateNestedManyWithoutMerchantInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutMerchantInput
+  webhookLogs?: Prisma.WebhookLogCreateNestedManyWithoutMerchantInput
+}
+
+export type MerchantUncheckedCreateWithoutFraudRulesInput = {
+  id?: string
+  name: string
+  email: string
+  phone: string
+  businessName: string
+  businessType: string
+  tradeLicense: string
+  businessRegNo?: string | null
+  tinNo?: string | null
+  businessAddress: string
+  businessWebsite?: string | null
+  businessCategory: string
+  apiKey: string
+  secretKey: string
+  webhookSecret?: string | null
+  webhookUrl?: string | null
+  isEmailVerified?: boolean
+  isPhoneVerified?: boolean
+  isKycVerified?: boolean
+  status?: $Enums.MerchantStatus
+  bankName?: string | null
+  accountName?: string | null
+  accountNumber?: string | null
+  routingNumber?: string | null
+  isActive?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  paymentSessions?: Prisma.PaymentSessionUncheckedCreateNestedManyWithoutMerchantInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMerchantInput
+  webhookLogs?: Prisma.WebhookLogUncheckedCreateNestedManyWithoutMerchantInput
+}
+
+export type MerchantCreateOrConnectWithoutFraudRulesInput = {
+  where: Prisma.MerchantWhereUniqueInput
+  create: Prisma.XOR<Prisma.MerchantCreateWithoutFraudRulesInput, Prisma.MerchantUncheckedCreateWithoutFraudRulesInput>
+}
+
+export type MerchantUpsertWithoutFraudRulesInput = {
+  update: Prisma.XOR<Prisma.MerchantUpdateWithoutFraudRulesInput, Prisma.MerchantUncheckedUpdateWithoutFraudRulesInput>
+  create: Prisma.XOR<Prisma.MerchantCreateWithoutFraudRulesInput, Prisma.MerchantUncheckedCreateWithoutFraudRulesInput>
+  where?: Prisma.MerchantWhereInput
+}
+
+export type MerchantUpdateToOneWithWhereWithoutFraudRulesInput = {
+  where?: Prisma.MerchantWhereInput
+  data: Prisma.XOR<Prisma.MerchantUpdateWithoutFraudRulesInput, Prisma.MerchantUncheckedUpdateWithoutFraudRulesInput>
+}
+
+export type MerchantUpdateWithoutFraudRulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
+  secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  paymentSessions?: Prisma.PaymentSessionUpdateManyWithoutMerchantNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutMerchantNestedInput
+  webhookLogs?: Prisma.WebhookLogUpdateManyWithoutMerchantNestedInput
+}
+
+export type MerchantUncheckedUpdateWithoutFraudRulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.StringFieldUpdateOperationsInput | string
+  businessName?: Prisma.StringFieldUpdateOperationsInput | string
+  businessType?: Prisma.StringFieldUpdateOperationsInput | string
+  tradeLicense?: Prisma.StringFieldUpdateOperationsInput | string
+  businessRegNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tinNo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  businessWebsite?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  businessCategory?: Prisma.StringFieldUpdateOperationsInput | string
+  apiKey?: Prisma.StringFieldUpdateOperationsInput | string
+  secretKey?: Prisma.StringFieldUpdateOperationsInput | string
+  webhookSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  webhookUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isEmailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isPhoneVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isKycVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status?: Prisma.EnumMerchantStatusFieldUpdateOperationsInput | $Enums.MerchantStatus
+  bankName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  routingNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  paymentSessions?: Prisma.PaymentSessionUncheckedUpdateManyWithoutMerchantNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMerchantNestedInput
+  webhookLogs?: Prisma.WebhookLogUncheckedUpdateManyWithoutMerchantNestedInput
+}
+
 export type MerchantCreateWithoutPaymentSessionsInput = {
   id?: string
   name: string
@@ -907,6 +1064,7 @@ export type MerchantCreateWithoutPaymentSessionsInput = {
   updatedAt?: Date | string
   transactions?: Prisma.TransactionCreateNestedManyWithoutMerchantInput
   webhookLogs?: Prisma.WebhookLogCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantUncheckedCreateWithoutPaymentSessionsInput = {
@@ -939,6 +1097,7 @@ export type MerchantUncheckedCreateWithoutPaymentSessionsInput = {
   updatedAt?: Date | string
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMerchantInput
   webhookLogs?: Prisma.WebhookLogUncheckedCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleUncheckedCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantCreateOrConnectWithoutPaymentSessionsInput = {
@@ -987,6 +1146,7 @@ export type MerchantUpdateWithoutPaymentSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUpdateManyWithoutMerchantNestedInput
   webhookLogs?: Prisma.WebhookLogUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUpdateManyWithoutMerchantNestedInput
 }
 
 export type MerchantUncheckedUpdateWithoutPaymentSessionsInput = {
@@ -1019,6 +1179,7 @@ export type MerchantUncheckedUpdateWithoutPaymentSessionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMerchantNestedInput
   webhookLogs?: Prisma.WebhookLogUncheckedUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUncheckedUpdateManyWithoutMerchantNestedInput
 }
 
 export type MerchantCreateWithoutTransactionsInput = {
@@ -1051,6 +1212,7 @@ export type MerchantCreateWithoutTransactionsInput = {
   updatedAt?: Date | string
   paymentSessions?: Prisma.PaymentSessionCreateNestedManyWithoutMerchantInput
   webhookLogs?: Prisma.WebhookLogCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantUncheckedCreateWithoutTransactionsInput = {
@@ -1083,6 +1245,7 @@ export type MerchantUncheckedCreateWithoutTransactionsInput = {
   updatedAt?: Date | string
   paymentSessions?: Prisma.PaymentSessionUncheckedCreateNestedManyWithoutMerchantInput
   webhookLogs?: Prisma.WebhookLogUncheckedCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleUncheckedCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantCreateOrConnectWithoutTransactionsInput = {
@@ -1131,6 +1294,7 @@ export type MerchantUpdateWithoutTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentSessions?: Prisma.PaymentSessionUpdateManyWithoutMerchantNestedInput
   webhookLogs?: Prisma.WebhookLogUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUpdateManyWithoutMerchantNestedInput
 }
 
 export type MerchantUncheckedUpdateWithoutTransactionsInput = {
@@ -1163,6 +1327,7 @@ export type MerchantUncheckedUpdateWithoutTransactionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentSessions?: Prisma.PaymentSessionUncheckedUpdateManyWithoutMerchantNestedInput
   webhookLogs?: Prisma.WebhookLogUncheckedUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUncheckedUpdateManyWithoutMerchantNestedInput
 }
 
 export type MerchantCreateWithoutWebhookLogsInput = {
@@ -1195,6 +1360,7 @@ export type MerchantCreateWithoutWebhookLogsInput = {
   updatedAt?: Date | string
   paymentSessions?: Prisma.PaymentSessionCreateNestedManyWithoutMerchantInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantUncheckedCreateWithoutWebhookLogsInput = {
@@ -1227,6 +1393,7 @@ export type MerchantUncheckedCreateWithoutWebhookLogsInput = {
   updatedAt?: Date | string
   paymentSessions?: Prisma.PaymentSessionUncheckedCreateNestedManyWithoutMerchantInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutMerchantInput
+  fraudRules?: Prisma.FraudRuleUncheckedCreateNestedManyWithoutMerchantInput
 }
 
 export type MerchantCreateOrConnectWithoutWebhookLogsInput = {
@@ -1275,6 +1442,7 @@ export type MerchantUpdateWithoutWebhookLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentSessions?: Prisma.PaymentSessionUpdateManyWithoutMerchantNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUpdateManyWithoutMerchantNestedInput
 }
 
 export type MerchantUncheckedUpdateWithoutWebhookLogsInput = {
@@ -1307,6 +1475,7 @@ export type MerchantUncheckedUpdateWithoutWebhookLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   paymentSessions?: Prisma.PaymentSessionUncheckedUpdateManyWithoutMerchantNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutMerchantNestedInput
+  fraudRules?: Prisma.FraudRuleUncheckedUpdateManyWithoutMerchantNestedInput
 }
 
 
@@ -1318,12 +1487,14 @@ export type MerchantCountOutputType = {
   paymentSessions: number
   transactions: number
   webhookLogs: number
+  fraudRules: number
 }
 
 export type MerchantCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   paymentSessions?: boolean | MerchantCountOutputTypeCountPaymentSessionsArgs
   transactions?: boolean | MerchantCountOutputTypeCountTransactionsArgs
   webhookLogs?: boolean | MerchantCountOutputTypeCountWebhookLogsArgs
+  fraudRules?: boolean | MerchantCountOutputTypeCountFraudRulesArgs
 }
 
 /**
@@ -1355,6 +1526,13 @@ export type MerchantCountOutputTypeCountTransactionsArgs<ExtArgs extends runtime
  */
 export type MerchantCountOutputTypeCountWebhookLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.WebhookLogWhereInput
+}
+
+/**
+ * MerchantCountOutputType without action
+ */
+export type MerchantCountOutputTypeCountFraudRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FraudRuleWhereInput
 }
 
 
@@ -1389,6 +1567,7 @@ export type MerchantSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   paymentSessions?: boolean | Prisma.Merchant$paymentSessionsArgs<ExtArgs>
   transactions?: boolean | Prisma.Merchant$transactionsArgs<ExtArgs>
   webhookLogs?: boolean | Prisma.Merchant$webhookLogsArgs<ExtArgs>
+  fraudRules?: boolean | Prisma.Merchant$fraudRulesArgs<ExtArgs>
   _count?: boolean | Prisma.MerchantCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["merchant"]>
 
@@ -1487,6 +1666,7 @@ export type MerchantInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   paymentSessions?: boolean | Prisma.Merchant$paymentSessionsArgs<ExtArgs>
   transactions?: boolean | Prisma.Merchant$transactionsArgs<ExtArgs>
   webhookLogs?: boolean | Prisma.Merchant$webhookLogsArgs<ExtArgs>
+  fraudRules?: boolean | Prisma.Merchant$fraudRulesArgs<ExtArgs>
   _count?: boolean | Prisma.MerchantCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MerchantIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1498,6 +1678,7 @@ export type $MerchantPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     paymentSessions: Prisma.$PaymentSessionPayload<ExtArgs>[]
     transactions: Prisma.$TransactionPayload<ExtArgs>[]
     webhookLogs: Prisma.$WebhookLogPayload<ExtArgs>[]
+    fraudRules: Prisma.$FraudRulePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1924,6 +2105,7 @@ export interface Prisma__MerchantClient<T, Null = never, ExtArgs extends runtime
   paymentSessions<T extends Prisma.Merchant$paymentSessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Merchant$paymentSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transactions<T extends Prisma.Merchant$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Merchant$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   webhookLogs<T extends Prisma.Merchant$webhookLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Merchant$webhookLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WebhookLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fraudRules<T extends Prisma.Merchant$fraudRulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Merchant$fraudRulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FraudRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2442,6 +2624,30 @@ export type Merchant$webhookLogsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.WebhookLogScalarFieldEnum | Prisma.WebhookLogScalarFieldEnum[]
+}
+
+/**
+ * Merchant.fraudRules
+ */
+export type Merchant$fraudRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FraudRule
+   */
+  select?: Prisma.FraudRuleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FraudRule
+   */
+  omit?: Prisma.FraudRuleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FraudRuleInclude<ExtArgs> | null
+  where?: Prisma.FraudRuleWhereInput
+  orderBy?: Prisma.FraudRuleOrderByWithRelationInput | Prisma.FraudRuleOrderByWithRelationInput[]
+  cursor?: Prisma.FraudRuleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FraudRuleScalarFieldEnum | Prisma.FraudRuleScalarFieldEnum[]
 }
 
 /**
