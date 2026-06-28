@@ -233,6 +233,9 @@ Generated automatically via Swagger.
 - [ ] Real bKash Integration
 - [ ] Real Nagad Integration
 - [ ] Admin Dashboard
+- [ ] Refund System
+- [ ] Settlement Engine
+- [ ] Multi Currency
 
 ---
 
